@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-function SelectItem({ optList }) {
+interface SelectItemProps {
+  optList: string[];
+}
+
+function SelectItem({ optList }: SelectItemProps) {
   return (
     <Qselect>
       {optList.map((opt, idx) => (

@@ -22,58 +22,46 @@ const keyTranslations: { [key: string]: string } = {
   smoking: "흡연",
 };
 
-const translateKeys = (obj: {
-  [key: string]: string;
-}): { [key: string]: string } =>
+const translateKeys = (obj: Partial<DataItem>) =>
   Object.fromEntries(
     Object.entries(obj).map(([key, value]) => [
-      keyTranslations[key] ?? key, // 매핑된 한국어 키가 없으면 원래 키 사용
-      value,
+      keyTranslations[key] || key, // 매핑된 한국어 키가 없으면 원래 키 사용
+      value ? String(value) : "", // 값이 undefined일 경우 빈 문자열로 처리
     ])
   );
 
-const filterAndCleanData = (
-  data: DataItem[],
-  id: string
-): Partial<DataItem>[] =>
-  data
-    .filter((item) => item.id === id) // id가 일치하는 객체 필터링
-    .map(({ id, ...rest }) => rest); // id 속성 제거하고 나머지 속성 반환
+const filterAndCleanData = (data: DataItem[], id: string) =>
+  data.filter((item) => item.id === id).map(({ id, ...rest }) => rest);
 
-const saveAsImage = (elementId) => {
+const saveAsImage = (elementId: string): void => {
   const element = document.getElementById(elementId);
 
   if (element) {
     html2canvas(element, {
       useCORS: true,
-      backgroundColor: null, // 투명 배경 유지
+      backgroundColor: null,
       scrollY: -window.scrollY,
       scrollX: -window.scrollX,
     }).then((canvas) => {
       const ctx = canvas.getContext("2d");
       if (ctx) {
-        // 배경을 흰색으로 설정한 새로운 캔버스 생성
         const backgroundCanvas = document.createElement("canvas");
         backgroundCanvas.width = canvas.width;
         backgroundCanvas.height = canvas.height;
         const backgroundCtx = backgroundCanvas.getContext("2d");
         if (backgroundCtx) {
-          // 흰색 배경을 채우기
-          backgroundCtx.fillStyle = "#ffffff";
+          backgroundCtx.fillStyle = "null";
           backgroundCtx.fillRect(
             0,
             0,
             backgroundCanvas.width,
             backgroundCanvas.height
           );
-
-          // 원본 캔버스를 배경 위에 그리기
           backgroundCtx.drawImage(canvas, 0, 0);
 
-          // 새로운 캔버스를 이미지로 저장
           const link = document.createElement("a");
           link.href = backgroundCanvas.toDataURL("image/png");
-          link.download = "result_with_shadow.png";
+          link.download = "result.png";
           link.click();
         }
       }
@@ -82,7 +70,7 @@ const saveAsImage = (elementId) => {
 };
 
 const Result = () => {
-  const { data } = useContext(QuestionStateContext);
+  const { data }: { data: DataItem[] } = useContext(QuestionStateContext);
   const ME = filterAndCleanData(data, "1");
   const YOU = filterAndCleanData(data, "2");
 
