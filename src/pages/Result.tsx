@@ -88,10 +88,8 @@ const Result = () => {
               <DataListItem key={key}>
                 {key}:
                 {Array.isArray(value)
-                  ? String(value)
-                      .split(",")
-                      .map((v, idx) => <Item key={idx}>{v.trim()}</Item>)
-                  : value.map((v, idx) => <Item key={idx}>{String(v)}</Item>)}
+                  ? value.map((v, idx) => <Item key={idx}>{String(v)}</Item>)
+                  : String(value)}
               </DataListItem>
             ))}
           </div>
@@ -113,10 +111,7 @@ const Result = () => {
                 {key}:
                 {Array.isArray(value)
                   ? value.map((v, idx) => <Item key={idx}>{String(v)}</Item>)
-                  : // 쉼표를 기준으로 문자열을 분리하여 각 요소를 따로 렌더링
-                    String(value)
-                      .split(",")
-                      .map((v, idx) => <Item key={idx}>{v.trim()}</Item>)}
+                  : String(value)}
               </DataListItem>
             ))}
           </div>
