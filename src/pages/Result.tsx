@@ -45,19 +45,20 @@ const saveAsImage = (elementId: string): void => {
     }).then((canvas) => {
       const ctx = canvas.getContext("2d");
       if (ctx) {
+        // 고정된 너비 설정
+        const desiredWidth = 500;
+        const scale = desiredWidth / canvas.width;
+        const desiredHeight = canvas.height * scale;
+
+        // 새로운 캔버스 생성
         const backgroundCanvas = document.createElement("canvas");
-        backgroundCanvas.width = canvas.width;
-        backgroundCanvas.height = canvas.height;
+        backgroundCanvas.width = desiredWidth;
+        backgroundCanvas.height = desiredHeight;
         const backgroundCtx = backgroundCanvas.getContext("2d");
         if (backgroundCtx) {
-          backgroundCtx.fillStyle = "null";
-          backgroundCtx.fillRect(
-            0,
-            0,
-            backgroundCanvas.width,
-            backgroundCanvas.height
-          );
-          backgroundCtx.drawImage(canvas, 0, 0);
+          backgroundCtx.fillStyle = "#ffffff"; // 배경색 설정
+          backgroundCtx.fillRect(0, 0, desiredWidth, desiredHeight);
+          backgroundCtx.drawImage(canvas, 0, 0, desiredWidth, desiredHeight);
 
           const link = document.createElement("a");
           link.href = backgroundCanvas.toDataURL("image/png");
