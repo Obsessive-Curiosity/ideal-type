@@ -3,9 +3,13 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import QuestionBtn from "../components/QuestionItems/QuestionBtn";
+import { useContext } from "react";
+import QuestionStateContext from "../contexts/QuestionStateContext";
+import DataItem from "../interfaces/DataItem";
 
 const Home = () => {
   const nav = useNavigate();
+  const { data }: { data: DataItem[] } = useContext(QuestionStateContext);
 
   const onClickMe = () => {
     nav("/question/1");
@@ -14,7 +18,19 @@ const Home = () => {
     nav("/question/2");
   };
   const onClickResult = () => {
-    nav("/result");
+    if (data.length === 0) {
+      alert("자기소개표와 이미지표를 작성해주세요!");
+    } else if (data.length === 1) {
+      if (data.some((item) => item.id === "1")) {
+        alert("이상형표를 작성해주세요!");
+      } else if (data.some((item) => item.id === "2")) {
+        alert("자기소개표를 작성해주세요!");
+      } else {
+        alert("잘못된 데이타 값입니다!");
+      }
+    } else {
+      nav("/result");
+    }
   };
 
   return (
