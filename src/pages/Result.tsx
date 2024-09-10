@@ -90,7 +90,9 @@ const Result = () => {
                 {key}:
                 {Array.isArray(value)
                   ? value.map((v, idx) => <Item key={idx}>{String(v)}</Item>)
-                  : String(value)}
+                  : value
+                      .split(",")
+                      .map((v, idx) => <Item key={idx}>{v.trim()}</Item>)}
               </DataListItem>
             ))}
           </div>
@@ -112,7 +114,9 @@ const Result = () => {
                 {key}:
                 {Array.isArray(value)
                   ? value.map((v, idx) => <Item key={idx}>{String(v)}</Item>)
-                  : String(value)}
+                  : value
+                      .split(",")
+                      .map((v, idx) => <Item key={idx}>{v.trim()}</Item>)}
               </DataListItem>
             ))}
           </div>
