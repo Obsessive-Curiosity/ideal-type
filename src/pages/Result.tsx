@@ -15,7 +15,7 @@ const Result = () => {
         const meDataUrl = await toPng(meRef.current);
         const meLink = document.createElement("a");
         meLink.href = meDataUrl;
-        meLink.download = "me-result-image.png";
+        meLink.download = "ideal-table-me.png";
         meLink.click();
       }
 
@@ -23,7 +23,7 @@ const Result = () => {
         const youDataUrl = await toPng(youRef.current);
         const youLink = document.createElement("a");
         youLink.href = youDataUrl;
-        youLink.download = "you-result-image.png";
+        youLink.download = "ideal-table-you.png";
         youLink.click();
       }
     } catch (err) {

@@ -49,7 +49,7 @@ const ResultItem = ({ meRef, youRef }: ResultItemProps) => {
           <div key={index}>
             {Object.entries(translateKeys(item)).map(([key, value]) => (
               <DataListItem key={key}>
-                {key}:
+                <ItemTitle>{key}</ItemTitle>
                 {Array.isArray(value)
                   ? value.map((v, idx) => <Item key={idx}>{String(v)}</Item>)
                   : value
@@ -66,7 +66,7 @@ const ResultItem = ({ meRef, youRef }: ResultItemProps) => {
           <div key={index}>
             {Object.entries(translateKeys(item)).map(([key, value]) => (
               <DataListItem key={key}>
-                {key}:
+                <ItemTitle>{key}</ItemTitle>
                 {Array.isArray(value)
                   ? value.map((v, idx) => <Item key={idx}>{String(v)}</Item>)
                   : value
@@ -92,55 +92,44 @@ const SectionTitle = styled.h2`
 `;
 
 const DataList = styled.div`
+  background-color: white;
   padding: 0 20px;
-  border-radius: 8px;
   margin-top: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 박스 쉐도우 추가 */
-  background-color: #ffffff; /* 배경색 흰색 */
   padding: 5px 20px;
 `;
 
 const DataListItem = styled.p`
-  font-size: 18px;
-  color: black;
+  position: relative;
+  font-size: 12px;
+  border: 1px solid #d5c9e6;
+  border-radius: 10px;
+  padding: 10px 3px;
+  color: #694e99;
   margin-bottom: 20px;
+`;
 
-  &::before {
-    content: "• ";
-    color: #694e99;
-    font-weight: bold;
-  }
+const ItemTitle = styled.div`
+  position: absolute;
+  top: -12px;
+  left: 12px;
+  background-color: white;
+  padding: 3px;
 `;
 
 const Item = styled.div`
+  position: relative;
   background-color: white;
   color: black;
-  font-size: 12px;
+  font-size: 15px;
   border-radius: 10px;
   padding: 4px 8px;
+  margin: 5px;
   display: inline-block; /* 글자 크기에 맞게 너비 조정 */
   margin-left: 10px; /* 키와 값 사이의 간격 추가 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 박스 쉐도우 추가 */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   white-space: nowrap; /* 줄바꿈 방지 */
-`;
-
-const Button = styled.button`
-  background-color: #694e99;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  margin: 10px;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    background-color: #5a3f7a;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  }
-
-  &:active {
-    background-color: #4a2e5b;
+  &:first-child {
+    margin-left: 0;
   }
 `;
