@@ -3,6 +3,7 @@ import html2canvas from "html2canvas";
 import saveAs from "file-saver";
 import { useRef } from "react";
 import Header from "../components/Header/index";
+import Footer from "../components/Footer/index";
 import ResultItem from "../components/ResultItem/index";
 
 const Result = () => {
@@ -29,7 +30,7 @@ const Result = () => {
     <Container>
       <Header title={"결과 보기"} />
       <ResultItem meRef={meRef} youRef={youRef} />
-      <button onClick={handleDownload}>다운로드</button>{" "}
+      <Footer title={"다운로드"} onClick={handleDownload} />
     </Container>
   );
 };
