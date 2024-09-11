@@ -19,9 +19,17 @@ export default index;
 const FooterWrapper = styled.footer`
   display: flex;
   align-items: center;
-  padding: 20px 0px;
+  padding: 20px 0;
   border-top: 1px solid #d5c9e6;
   justify-content: center;
+  box-sizing: border-box;
+  position: relative; /* 절대 위치가 아닌 상대 위치로 설정 */
+  font-size: 25px;
+
+  @media (max-width: 600px) {
+    padding: 15px 0; /* 모바일에서 패딩 조정 */
+    font-size: 20px; /* 모바일에서 폰트 크기 조정 */
+  }
 `;
 const Button = styled.button`
   color: #694e99;

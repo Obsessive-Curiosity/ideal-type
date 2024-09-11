@@ -125,12 +125,16 @@ export default Question;
 const QuestionWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh; // 전체 높이 차지
+  min-height: 100vh;
+  padding-bottom: auto;
+  justify-content: space-between;
 `;
+
 const ContentWrapper = styled.div`
   display: flex;
-  flex: 1; // 남은 공간을 채우기
+  flex: 1; /* 남은 공간을 모두 차지 */
   flex-direction: column;
   margin: 0 auto;
-  justify-content: center;
+  justify-content: center; /* 콘텐츠 중앙 정렬 */
+  box-sizing: border-box; /* 패딩과 여백을 포함한 크기 조정 */
 `;
