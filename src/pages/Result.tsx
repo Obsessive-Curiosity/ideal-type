@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { toPng, toBlob } from "html-to-image";
+import { toBlob } from "html-to-image";
 import styled from "styled-components";
 import Header from "../components/Header/index";
 import ResultItem from "../components/ResultItem/index";
@@ -16,8 +16,13 @@ const Result = () => {
         try {
           await document.fonts.ready;
 
+          // Blob 형태로 이미지를 가져옵니다.
           const meBlob = await toBlob(meRef.current);
           const youBlob = await toBlob(youRef.current);
+
+          if (!meBlob || !youBlob) {
+            throw new Error("Failed to generate image blobs.");
+          }
 
           const canvas = document.createElement("canvas");
           const ctx = canvas.getContext("2d");
@@ -54,11 +59,16 @@ const Result = () => {
           ctx.drawImage(meImageLoaded, 0, 0);
           ctx.drawImage(youImageLoaded, meImageLoaded.width, 0);
 
-          const combinedBlob = await new Promise<Blob>((resolve) =>
+          // Blob을 사용하여 이미지 URL을 생성합니다.
+          const combinedBlob = await new Promise<Blob | null>((resolve) =>
             canvas.toBlob(resolve, "image/png")
           );
-          const url = URL.createObjectURL(combinedBlob);
-          setCombinedImageSrc(url);
+
+          if (combinedBlob) {
+            const url = URL.createObjectURL(combinedBlob);
+            setCombinedImageSrc(url);
+          }
+
           setIsLoading(false);
         } catch (err) {
           console.error("이미지 생성 중 오류가 발생했습니다.", err);
