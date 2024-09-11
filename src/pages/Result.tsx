@@ -31,9 +31,6 @@ const Result = () => {
       const meImage = meCanvas.toDataURL("image/png");
       const youImage = youCanvas.toDataURL("image/png");
 
-      const meImg = new Image();
-      const youImg = new Image();
-
       const loadImage = (src: string) => {
         return new Promise<HTMLImageElement>((resolve, reject) => {
           const img = new Image();
@@ -72,7 +69,7 @@ const Result = () => {
       // Blob으로 변환하고 저장합니다.
       combinedCanvas.toBlob((blob) => {
         if (blob !== null) {
-          saveAs(blob, "combined-result.png");
+          saveAs(blob, "ideal-type.png");
         }
       }, "image/png");
     } catch (error) {
