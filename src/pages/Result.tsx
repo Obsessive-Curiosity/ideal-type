@@ -39,13 +39,12 @@ const Result = () => {
       </ResultItemContainer>
       {meImageSrc && (
         <ImageWrapper>
-          <h2>Me Image</h2>
+          <h2>이미지를 다운로드 하실 수 있습니다.</h2>
           <img src={meImageSrc} alt="Me Result" />
         </ImageWrapper>
       )}
       {youImageSrc && (
         <ImageWrapper>
-          <h2>You Image</h2>
           <img src={youImageSrc} alt="You Result" />
         </ImageWrapper>
       )}
