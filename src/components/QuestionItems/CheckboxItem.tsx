@@ -56,4 +56,8 @@ const QItem = styled.label`
   input[type="checkbox"]:checked {
     border-color: #694e99;
   }
+
+  @media (max-width: 600px) {
+    font-size: 15px; /* 모바일에서 폰트 크기 조정 */
+  }
 `;

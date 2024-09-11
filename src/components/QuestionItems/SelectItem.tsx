@@ -33,4 +33,8 @@ const Qselect = styled.select`
   color: rgb(51, 61, 75);
   width: 100%;
   box-sizing: border-box; /* 패딩과 보더를 포함한 크기를 계산 */
+
+  @media (max-width: 600px) {
+    font-size: 15px; /* 모바일에서 폰트 크기 조정 */
+  }
 `;

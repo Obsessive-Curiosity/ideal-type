@@ -137,4 +137,8 @@ const ContentWrapper = styled.div`
   margin: 0 auto;
   justify-content: center; /* 콘텐츠 중앙 정렬 */
   box-sizing: border-box; /* 패딩과 여백을 포함한 크기 조정 */
+
+  @media (max-width: 600px) {
+    font-size: 12px; /* 모바일에서 폰트 크기 조정 */
+  }
 `;
