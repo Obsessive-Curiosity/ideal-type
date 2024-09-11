@@ -35,11 +35,12 @@ const Result = () => {
     <Container>
       <Header title={"결과 보기"} />
       <ResultItemContainer isHidden={isHidden}>
+        <h4>이미지 로딩중 입니다.</h4>
         <ResultItem meRef={meRef} youRef={youRef} />
       </ResultItemContainer>
       {meImageSrc && (
         <ImageWrapper>
-          <h2>이미지를 다운로드 하실 수 있습니다.</h2>
+          <h4>이미지를 다운로드 하실 수 있습니다.</h4>
           <img src={meImageSrc} alt="Me Result" />
         </ImageWrapper>
       )}
@@ -71,5 +72,9 @@ const ImageWrapper = styled.div`
 
 // ResultItem을 display 속성으로 숨기고 보이게 합니다.
 const ResultItemContainer = styled.div<{ isHidden: boolean }>`
+  h4 {
+    text-align: center;
+    margin-top: 20px;
+  }
   display: ${(props) => (props.isHidden ? "none" : "block")};
 `;
