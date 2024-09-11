@@ -98,7 +98,7 @@ const DataList = styled.div`
   padding: 5px 20px;
 `;
 
-const DataListItem = styled.p`
+const DataListItem = styled.div`
   position: relative;
   font-size: 12px;
   border: 1px solid #d5c9e6;
