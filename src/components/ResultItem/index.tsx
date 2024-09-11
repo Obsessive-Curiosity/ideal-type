@@ -121,13 +121,14 @@ const Item = styled.div`
   background-color: white;
   color: black;
   font-size: 15px;
+  border: 1px solid gray;
   border-radius: 10px;
   padding: 4px 8px;
   margin: 5px;
   display: inline-block; /* 글자 크기에 맞게 너비 조정 */
   margin-left: 10px; /* 키와 값 사이의 간격 추가 */
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; */
   white-space: nowrap; /* 줄바꿈 방지 */
   &:first-child {
     margin-left: 0;
