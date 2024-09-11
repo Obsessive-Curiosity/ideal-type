@@ -44,13 +44,23 @@ const Result = () => {
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
             // canvas의 데이터 URL 생성
-            const resizedDataUrl = canvas.toDataURL("image/png");
+            canvas.toBlob((blob) => {
+              if (blob) {
+                // blob URL 생성
+                const blobUrl = URL.createObjectURL(blob);
 
-            // 다운로드 링크 생성
-            const link = document.createElement("a");
-            link.href = resizedDataUrl;
-            link.download = fileName;
-            link.click();
+                // 다운로드 링크 생성
+                const link = document.createElement("a");
+                link.href = blobUrl;
+                link.download = fileName;
+                document.body.appendChild(link);
+                link.click();
+
+                // 다운로드 후 링크 제거
+                document.body.removeChild(link);
+                URL.revokeObjectURL(blobUrl);
+              }
+            }, "image/png");
           }
         };
       } catch (err) {
