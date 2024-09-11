@@ -29,33 +29,34 @@ const Result = () => {
             throw new Error("Canvas context is not available.");
           }
 
-          const meImage = new Image();
-          const youImage = new Image();
-
           // 이미지 로드가 완료되면 캔버스에 그립니다.
-          const loadImage = (src: string, image: HTMLImageElement) => {
-            return new Promise<void>((resolve, reject) => {
-              image.onload = () => resolve();
+          const loadImage = (src: string) => {
+            return new Promise<HTMLImageElement>((resolve, reject) => {
+              const image = new Image();
+              image.onload = () => resolve(image);
               image.onerror = reject;
               image.src = src;
             });
           };
 
-          await Promise.all([
-            loadImage(meDataUrl, meImage),
-            loadImage(youDataUrl, youImage),
+          // 이미지 로드
+          const [meImageLoaded, youImageLoaded] = await Promise.all([
+            loadImage(meDataUrl),
+            loadImage(youDataUrl),
           ]);
 
           // 캔버스 크기를 설정합니다. 두 이미지를 나란히 배치합니다.
           const devicePixelRatio = window.devicePixelRatio || 1;
-          canvas.width = (meImage.width + youImage.width) * devicePixelRatio;
+          canvas.width =
+            (meImageLoaded.width + youImageLoaded.width) * devicePixelRatio;
           canvas.height =
-            Math.max(meImage.height, youImage.height) * devicePixelRatio;
+            Math.max(meImageLoaded.height, youImageLoaded.height) *
+            devicePixelRatio;
           ctx.scale(devicePixelRatio, devicePixelRatio);
 
           // 두 이미지를 캔버스에 그립니다.
-          ctx.drawImage(meImage, 0, 0);
-          ctx.drawImage(youImage, meImage.width, 0);
+          ctx.drawImage(meImageLoaded, 0, 0);
+          ctx.drawImage(youImageLoaded, meImageLoaded.width, 0);
 
           // 결합된 이미지의 Data URL을 가져옵니다.
           const combinedDataUrl = canvas.toDataURL("image/png");
@@ -67,6 +68,7 @@ const Result = () => {
       }
     };
 
+    // 요청 애니메이션 프레임을 통해 이미지 생성
     requestAnimationFrame(() => {
       requestAnimationFrame(generateImages);
     });
