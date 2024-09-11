@@ -7,8 +7,7 @@ import ResultItem from "../components/ResultItem/index";
 const Result = () => {
   const meRef = useRef<HTMLDivElement>(null);
   const youRef = useRef<HTMLDivElement>(null);
-  const [meImageSrc, setMeImageSrc] = useState<string | null>(null);
-  const [youImageSrc, setYouImageSrc] = useState<string | null>(null);
+  const [combinedImageSrc, setCombinedImageSrc] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true); // 로딩 상태를 추적
 
   useEffect(() => {
@@ -18,12 +17,46 @@ const Result = () => {
           // 폰트가 로드될 때까지 기다립니다.
           await document.fonts.ready;
 
-          // 이미지를 캡처할 때 width와 height를 설정합니다.
+          // 각 이미지를 캡처합니다.
           const meDataUrl = await toPng(meRef.current, {});
           const youDataUrl = await toPng(youRef.current, {});
 
-          setMeImageSrc(meDataUrl);
-          setYouImageSrc(youDataUrl);
+          // 캔버스를 사용하여 이미지를 결합합니다.
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+
+          if (!ctx) {
+            throw new Error("Canvas context is not available.");
+          }
+
+          const meImage = new Image();
+          const youImage = new Image();
+
+          // 이미지 로드가 완료되면 캔버스에 그립니다.
+          const loadImage = (src: string, image: HTMLImageElement) => {
+            return new Promise<void>((resolve, reject) => {
+              image.onload = () => resolve();
+              image.onerror = reject;
+              image.src = src;
+            });
+          };
+
+          await Promise.all([
+            loadImage(meDataUrl, meImage),
+            loadImage(youDataUrl, youImage),
+          ]);
+
+          // 캔버스 크기를 설정합니다. 두 이미지를 나란히 배치합니다.
+          canvas.width = meImage.width + youImage.width;
+          canvas.height = Math.max(meImage.height, youImage.height);
+
+          // 두 이미지를 캔버스에 그립니다.
+          ctx.drawImage(meImage, 0, 0);
+          ctx.drawImage(youImage, meImage.width, 0);
+
+          // 결합된 이미지의 Data URL을 가져옵니다.
+          const combinedDataUrl = canvas.toDataURL("image/png");
+          setCombinedImageSrc(combinedDataUrl);
           setIsLoading(false); // 로딩 완료 후 상태 변경
         } catch (err) {
           console.error("이미지 생성 중 오류가 발생했습니다.", err);
@@ -43,15 +76,10 @@ const Result = () => {
         <h4>이미지 로딩중 입니다.</h4>
         <ResultItem meRef={meRef} youRef={youRef} />
       </ResultItemContainer>
-      {meImageSrc && (
+      {combinedImageSrc && (
         <ImageWrapper>
           <h4>이미지를 다운로드 하실 수 있습니다.</h4>
-          <img src={meImageSrc} alt="Me Result" />
-        </ImageWrapper>
-      )}
-      {youImageSrc && (
-        <ImageWrapper>
-          <img src={youImageSrc} alt="You Result" />
+          <img src={combinedImageSrc} alt="Combined Result" />
         </ImageWrapper>
       )}
     </Container>
