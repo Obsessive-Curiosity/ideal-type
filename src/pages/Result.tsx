@@ -47,8 +47,11 @@ const Result = () => {
           ]);
 
           // 캔버스 크기를 설정합니다. 두 이미지를 나란히 배치합니다.
-          canvas.width = meImage.width + youImage.width;
-          canvas.height = Math.max(meImage.height, youImage.height);
+          const devicePixelRatio = window.devicePixelRatio || 1;
+          canvas.width = (meImage.width + youImage.width) * devicePixelRatio;
+          canvas.height =
+            Math.max(meImage.height, youImage.height) * devicePixelRatio;
+          ctx.scale(devicePixelRatio, devicePixelRatio);
 
           // 두 이미지를 캔버스에 그립니다.
           ctx.drawImage(meImage, 0, 0);
