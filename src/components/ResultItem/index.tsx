@@ -117,8 +117,8 @@ const ItemTitle = styled.div`
 `;
 
 const Item = styled.div`
-  background-color: #694e99;
-  color: white;
+  background-color: #c09cff33;
+  color: black;
   font-size: 13px;
   border-radius: 8px;
   padding: 4px 8px;
