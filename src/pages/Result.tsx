@@ -15,11 +15,16 @@ const Result = () => {
 
     try {
       // 두 요소를 각각 캡처합니다.
-      const meCanvas = await html2canvas(meRef.current, { scale: 2 });
-      const youCanvas = await html2canvas(youRef.current, { scale: 2 });
+      const meCanvas = await html2canvas(meRef.current, {
+        scale: 1,
+        useCORS: true,
+      });
+      const youCanvas = await html2canvas(youRef.current, {
+        scale: 1,
+        useCORS: true,
+      });
 
-      // 캔버스 크기를 HTML 기준 600px로 조정합니다.
-      const scale = 600 / Math.max(meCanvas.width, youCanvas.width);
+      // 결합될 캔버스 생성
       const combinedCanvas = document.createElement("canvas");
       const ctx = combinedCanvas.getContext("2d");
 
@@ -27,48 +32,17 @@ const Result = () => {
         throw new Error("Canvas context is not available.");
       }
 
-      // 두 이미지의 크기를 결정합니다.
-      const meImage = meCanvas.toDataURL("image/png");
-      const youImage = youCanvas.toDataURL("image/png");
-
-      const loadImage = (src: string) => {
-        return new Promise<HTMLImageElement>((resolve, reject) => {
-          const img = new Image();
-          img.onload = () => resolve(img);
-          img.onerror = reject;
-          img.src = src;
-        });
-      };
-
-      const [meImgLoaded, youImgLoaded] = await Promise.all([
-        loadImage(meImage),
-        loadImage(youImage),
-      ]);
-
       // 결합된 캔버스의 크기를 설정합니다.
-      combinedCanvas.width = (meImgLoaded.width + youImgLoaded.width) * scale;
-      combinedCanvas.height =
-        Math.max(meImgLoaded.height, youImgLoaded.height) * scale;
+      combinedCanvas.width = meCanvas.width + youCanvas.width;
+      combinedCanvas.height = Math.max(meCanvas.height, youCanvas.height);
 
-      // 두 이미지를 결합합니다.
-      ctx.drawImage(
-        meImgLoaded,
-        0,
-        0,
-        meImgLoaded.width * scale,
-        meImgLoaded.height * scale
-      );
-      ctx.drawImage(
-        youImgLoaded,
-        meImgLoaded.width * scale,
-        0,
-        youImgLoaded.width * scale,
-        youImgLoaded.height * scale
-      );
+      // 두 이미지를 결합하여 캔버스에 그립니다.
+      ctx.drawImage(meCanvas, 0, 0);
+      ctx.drawImage(youCanvas, meCanvas.width, 0);
 
-      // Blob으로 변환하고 저장합니다.
+      // Blob으로 변환하고 이미지 저장
       combinedCanvas.toBlob((blob) => {
-        if (blob !== null) {
+        if (blob) {
           saveAs(blob, "ideal-type.png");
         }
       }, "image/png");

@@ -118,7 +118,7 @@ const ItemTitle = styled.div`
 
 const Item = styled.div`
   position: relative;
-  background-color: white;
+  background-color: #d5c9e6;
   color: black;
   font-size: 15px;
   border: 1px solid gray;
