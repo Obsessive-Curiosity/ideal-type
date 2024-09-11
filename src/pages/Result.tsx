@@ -1,41 +1,42 @@
+import { useEffect, useRef, useState } from "react";
 import { toPng } from "html-to-image";
-import { useRef, useState } from "react";
 import styled from "styled-components";
 import Header from "../components/Header/index";
 import ResultItem from "../components/ResultItem/index";
-import Footer from "../components/Footer/index";
 
 const Result = () => {
   const meRef = useRef<HTMLDivElement>(null);
   const youRef = useRef<HTMLDivElement>(null);
   const [meImageSrc, setMeImageSrc] = useState<string | null>(null);
   const [youImageSrc, setYouImageSrc] = useState<string | null>(null);
+  const [isHidden, setIsHidden] = useState(false);
 
-  const generateImage = async (
-    ref: React.RefObject<HTMLDivElement>,
-    setImageSrc: React.Dispatch<React.SetStateAction<string | null>>
-  ) => {
-    if (ref.current) {
-      try {
-        // DOM 요소를 이미지 데이터 URL로 변환
-        const dataUrl = await toPng(ref.current);
-        setImageSrc(dataUrl);
-      } catch (err) {
-        console.error("이미지 생성 중 오류가 발생했습니다.", err);
+  useEffect(() => {
+    const generateImages = async () => {
+      if (meRef.current && youRef.current) {
+        try {
+          const meDataUrl = await toPng(meRef.current, {});
+          const youDataUrl = await toPng(youRef.current, {});
+          setMeImageSrc(meDataUrl);
+          setYouImageSrc(youDataUrl);
+          setIsHidden(true); // 이미지 생성 완료 후 ResultItem 숨기기
+        } catch (err) {
+          console.error("이미지 생성 중 오류가 발생했습니다.", err);
+        }
       }
-    }
-  };
+    };
 
-  const handleGenerateImages = async () => {
-    await generateImage(meRef, setMeImageSrc);
-    await generateImage(youRef, setYouImageSrc);
-  };
+    requestAnimationFrame(() => {
+      requestAnimationFrame(generateImages);
+    });
+  }, []);
 
   return (
     <Container>
       <Header title={"결과 보기"} />
-      <ResultItem meRef={meRef} youRef={youRef} />
-      <Footer title={"이미지 저장하기"} onClick={handleGenerateImages} />
+      <ResultItemContainer isHidden={isHidden}>
+        <ResultItem meRef={meRef} youRef={youRef} />
+      </ResultItemContainer>
       {meImageSrc && (
         <ImageWrapper>
           <h2>Me Image</h2>
@@ -67,4 +68,9 @@ const ImageWrapper = styled.div`
     max-width: 100%;
     height: auto;
   }
+`;
+
+// ResultItem을 display 속성으로 숨기고 보이게 합니다.
+const ResultItemContainer = styled.div<{ isHidden: boolean }>`
+  display: ${(props) => (props.isHidden ? "none" : "block")};
 `;
