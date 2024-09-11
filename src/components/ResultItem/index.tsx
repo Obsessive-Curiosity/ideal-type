@@ -119,10 +119,14 @@ const ItemTitle = styled.div`
 const Item = styled.div`
   background-color: #694e99;
   color: white;
-  font-size: 14px;
+  font-size: 13px;
   border-radius: 8px;
   padding: 4px 8px;
   margin-top: 4px;
   display: inline-block; /* 글자 크기에 맞게 너비 조정 */
   margin-left: 10px; /* 키와 값 사이의 간격 추가 */
+  white-space: nowrap; /* 줄바꿈 방지 */
+  &:first-child {
+    margin-left: 0;
+  }
 `;
