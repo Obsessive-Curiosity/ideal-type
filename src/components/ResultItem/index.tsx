@@ -20,16 +20,19 @@ const keyTranslations: { [key: string]: string } = {
   smoking: "흡연",
 };
 
-const translateKeys = (obj: Partial<DataItem>) =>
+const translateKeys = (obj: DataItem) =>
   Object.fromEntries(
     Object.entries(obj).map(([key, value]) => [
       keyTranslations[key] || key, // 매핑된 한국어 키가 없으면 원래 키 사용
-      value ? String(value) : "", // 값이 undefined일 경우 빈 문자열로 처리
+      value,
     ])
   );
 
-const filterAndCleanData = (data: DataItem[], id: string) =>
-  data.filter((item) => item.id === id).map(({ id, ...rest }) => rest);
+const filterData = (data: DataItem[], id: string) => {
+  const findDataWithId = (item: DataItem) => item.id === id;
+  const deleteId = ({ id, ...rest }: DataItem) => rest;
+  return data.filter(findDataWithId).map(deleteId);
+};
 
 interface ResultItemProps {
   meRef: React.RefObject<HTMLDivElement>;
@@ -38,8 +41,8 @@ interface ResultItemProps {
 
 const ResultItem = ({ meRef, youRef }: ResultItemProps) => {
   const { data }: { data: DataItem[] } = useContext(QuestionStateContext);
-  const ME = filterAndCleanData(data, "1");
-  const YOU = filterAndCleanData(data, "2");
+  const ME = filterData(data, "1");
+  const YOU = filterData(data, "2");
 
   return (
     <>

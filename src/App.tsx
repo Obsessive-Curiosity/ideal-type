@@ -4,7 +4,8 @@ import { useEffect, useReducer } from "react";
 
 //pages
 import Home from "./pages/Home";
-import Question from "./pages/Question";
+import QuestionMe from "./pages/QuestionMe";
+import QuestionYou from "./pages/QuestionYou";
 import Result from "./pages/Result";
 import NotFound from "./pages/NotFound";
 
@@ -31,7 +32,8 @@ const saveDataToLocalStorage = (data: DataItem[]) => {
 // 액션 타입 정의
 type ActionType =
   | { type: "CREATE"; data: DataItem }
-  | { type: "UPDATE"; data: DataItem };
+  | { type: "UPDATE"; data: DataItem }
+  | { type: "RESET" };
 
 function reducer(state: DataItem[], action: ActionType): DataItem[] {
   switch (action.type) {
@@ -41,6 +43,8 @@ function reducer(state: DataItem[], action: ActionType): DataItem[] {
       return state.map((item) =>
         String(item.id) === String(action.data.id) ? action.data : item
       );
+    case "RESET":
+      return [];
     default:
       return state;
   }
@@ -70,16 +74,23 @@ function App() {
     });
   };
 
+  const onReset = () => {
+    dispatch({ type: "RESET" });
+  };
+
   return (
     <>
       <GlobalStyle />
       <QuestionStateContext.Provider value={{ data }}>
-        <QuestionDispatchContext.Provider value={{ onCreate, onUpdate }}>
+        <QuestionDispatchContext.Provider
+          value={{ onCreate, onUpdate, onReset }}
+        >
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/question/:id" element={<Question />} />
+            <Route path="/questionMe" element={<QuestionMe />} />
+            <Route path="/questionYou" element={<QuestionYou />} />
             <Route path="/result" element={<Result />} />
-            <Route path="*" element={<NotFound />} />
+            <Route element={<NotFound />} />
           </Routes>
         </QuestionDispatchContext.Provider>
       </QuestionStateContext.Provider>

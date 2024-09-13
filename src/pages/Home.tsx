@@ -5,18 +5,25 @@ import Footer from "../components/Footer";
 import QuestionBtn from "../components/QuestionItems/QuestionBtn";
 import { useContext } from "react";
 import QuestionStateContext from "../contexts/QuestionStateContext";
+import QuestionDispatchContext from "../contexts/QuestionDispatchContext";
 import DataItem from "../interfaces/DataItem";
 
 const Home = () => {
   const nav = useNavigate();
   const { data }: { data: DataItem[] } = useContext(QuestionStateContext);
+  const { onReset } = useContext(QuestionDispatchContext);
+  const isDone = data.length > 0;
 
   const onClickMe = () => {
-    nav("/question/1");
+    nav("/questionMe");
   };
   const onClickYou = () => {
-    nav("/question/2");
+    nav("/questionYou");
   };
+  const onClickReset = () => {
+    onReset();
+  };
+
   const onClickResult = () => {
     if (data.length === 0) {
       alert("자기소개표와 이미지표를 작성해주세요!");
@@ -37,8 +44,18 @@ const Home = () => {
     <HomeWrapper>
       <Header title={"반갑습니다!"} />
       <ContentWrapper>
-        <QuestionBtn text={"자기소개표 만들기"} onClick={onClickMe} />
-        <QuestionBtn text={"이상형표 만들기"} onClick={onClickYou} />
+        {isDone && (
+          <>
+            <QuestionBtn text={"자기소개표 수정하기"} onClick={onClickMe} />
+            <QuestionBtn text={"이상형표 수정하기"} onClick={onClickYou} />
+            <QuestionBtn text={"다시 시작하기"} onClick={onClickReset} />
+          </>
+        )}
+        {!isDone && (
+          <>
+            <QuestionBtn text={"시작하기"} onClick={onClickMe} />
+          </>
+        )}
       </ContentWrapper>
       <Footer title={"이미지 출력하기"} onClick={onClickResult} />
     </HomeWrapper>

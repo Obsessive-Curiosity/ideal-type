@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import { useNavigate, useParams } from "react-router-dom";
-import { createRef, useCallback, useContext, useEffect, useState } from "react";
+import { createRef, useCallback, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header/index";
 import Footer from "../components/Footer/index";
 import UserQuestion from "../components/UserQuestion/index";
 import QuestionStateContext from "../contexts/QuestionStateContext";
 import QuestionDispatchContext from "../contexts/QuestionDispatchContext";
+import refsKeys from "../constants/refsKeys";
 import DataItem from "../interfaces/DataItem";
-import refsKeys from "../constants/refsKeys"; // 키 값 배열을
 
 const hasAllValues = (input: { [key: string]: string[] }) => {
   return Object.values(input).every((array) => array.length > 0);
@@ -43,17 +43,14 @@ const initialState = {
   smoking: [] as string[],
 };
 
-const Question = () => {
+const QuestionMe = () => {
   const nav = useNavigate();
-  const { id } = useParams<{ id: string }>(); // URL에서 id를 받아옴
-  const questionTitle = id === "1" ? "자기소개표 만들기" : "이상형표 만들기";
+  const id = "1";
   const { data } = useContext(QuestionStateContext);
   const { onCreate, onUpdate } = useContext(QuestionDispatchContext);
+  const [input, setInput] = useState(initialState);
   const isDone = data.length > 0;
 
-  const [input, setInput] = useState(initialState);
-
-  // 컴포넌트 내부에서 useRef로 refs 생성
   const refs = refsKeys.reduce((acc, key) => {
     acc[key] = createRef<HTMLDivElement>();
     return acc;
@@ -66,14 +63,6 @@ const Question = () => {
     }));
   }, []);
 
-  // 페이지가 바뀔 때마다 1 또는 2가 아니면 notfound로 이동
-  useEffect(() => {
-    if (id !== "1" && id !== "2") {
-      nav("/notfound");
-      return;
-    }
-  }, [id, nav]);
-
   const onClickSubmit = () => {
     if (hasAllValues(input)) {
       const newData: DataItem = { id, ...input };
@@ -83,11 +72,10 @@ const Question = () => {
       } else {
         onCreate(newData);
       }
-
       if (isDone) {
         nav("/");
       } else {
-        nav("/question/2");
+        nav("/questionYou");
       }
     } else {
       const missingKeys = Object.keys(input).filter(
@@ -98,24 +86,23 @@ const Question = () => {
   };
 
   return (
-    <QuestionWrapper>
-      <Header title={questionTitle} />
-      <ContentWrapper>
-        {id && (
+    <>
+      <QuestionWrapper>
+        <Header title={"자기소개표 만들기"} />
+        <ContentWrapper>
           <UserQuestion
             id={id}
             input={input}
             setHandler={setHandler}
             refs={refs}
           />
-        )}
-      </ContentWrapper>
-      <Footer title={"제출하기"} onClick={onClickSubmit} />
-    </QuestionWrapper>
+        </ContentWrapper>
+        <Footer title={"제출하기"} onClick={onClickSubmit} />
+      </QuestionWrapper>
+    </>
   );
 };
-
-export default Question;
+export default QuestionMe;
 
 const QuestionWrapper = styled.div`
   display: flex;
