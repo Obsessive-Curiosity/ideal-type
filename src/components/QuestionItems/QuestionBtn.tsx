@@ -12,18 +12,19 @@ const QuestionBtn = ({ text, onClick }: QuestionBtnProps) => {
 export default QuestionBtn;
 
 const Button = styled.button`
-  width: 200px;
-  height: 100px;
+  width: 220px;
+  padding: 30px 0;
   margin: 10px;
-  border: 1px solid black;
+  border: 1px solid #694e99;
   border-radius: 10px;
-  background-color: rgba(
-    105,
-    78,
-    153,
-    0.5
-  ); /* 배경색을 설정하고 투명도 50% 적용 */
-  color: black;
-  font-size: 18px;
+  background-color: #d5c9e6;
+  color: #694e99;
+  font-size: 20px;
   cursor: pointer;
+
+  @media (max-width: 600px) {
+    width: 200px;
+    padding: 20px 0;
+    font-size: 18px; /* 모바일에서 폰트 크기 조정 */
+  }
 `;

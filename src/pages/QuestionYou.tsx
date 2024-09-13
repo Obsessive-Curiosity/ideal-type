@@ -83,7 +83,7 @@ const QuestionYou = () => {
   return (
     <>
       <QuestionWrapper>
-        <Header title={"자기소개표 만들기"} />
+        <Header title={"이상형표 만들기"} />
         <ContentWrapper>
           <UserQuestion
             id={id}
