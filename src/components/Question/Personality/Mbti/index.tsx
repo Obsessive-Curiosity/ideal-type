@@ -7,22 +7,22 @@ import useCheckbox from "../../../../hooks/useCheckbox";
 import CheckboxItem from "../../../QuestionItems/CheckboxItem";
 
 const mbtiList: [string, typeof OPT_CHECKBOX.MULTI][] = [
-  ["ISTJ 세상의 소금형", OPT_CHECKBOX.MULTI],
-  ["ISFJ 임금뒷편의 권력형", OPT_CHECKBOX.MULTI],
-  ["INFJ 예언자형", OPT_CHECKBOX.MULTI],
-  ["INTJ 과학자형", OPT_CHECKBOX.MULTI],
-  ["ISTP 백과사전형", OPT_CHECKBOX.MULTI],
-  ["ISFP 성인군자형", OPT_CHECKBOX.MULTI],
-  ["INFP 잔다르크형", OPT_CHECKBOX.MULTI],
-  ["INTP 아이디어 뱅크형", OPT_CHECKBOX.MULTI],
-  ["ESTP 수완좋은 활동가형", OPT_CHECKBOX.MULTI],
-  ["ESFP 사교적인 유형", OPT_CHECKBOX.MULTI],
-  ["ENFP 스파크형", OPT_CHECKBOX.MULTI],
-  ["ENTP 발명가형", OPT_CHECKBOX.MULTI],
-  ["ESTJ 사업가형", OPT_CHECKBOX.MULTI],
-  ["ESFJ 친선도모형", OPT_CHECKBOX.MULTI],
-  ["ENFJ 언변능숙형", OPT_CHECKBOX.MULTI],
-  ["ENTJ 지도자형", OPT_CHECKBOX.MULTI],
+  ["ISTJ", OPT_CHECKBOX.MULTI],
+  ["ISFJ", OPT_CHECKBOX.MULTI],
+  ["INFJ", OPT_CHECKBOX.MULTI],
+  ["INTJ", OPT_CHECKBOX.MULTI],
+  ["ISTP", OPT_CHECKBOX.MULTI],
+  ["ISFP", OPT_CHECKBOX.MULTI],
+  ["INFP", OPT_CHECKBOX.MULTI],
+  ["INTP", OPT_CHECKBOX.MULTI],
+  ["ESTP", OPT_CHECKBOX.MULTI],
+  ["ESFP", OPT_CHECKBOX.MULTI],
+  ["ENFP", OPT_CHECKBOX.MULTI],
+  ["ENTP", OPT_CHECKBOX.MULTI],
+  ["ESTJ", OPT_CHECKBOX.MULTI],
+  ["ESFJ", OPT_CHECKBOX.MULTI],
+  ["ENFJ", OPT_CHECKBOX.MULTI],
+  ["ENTJ", OPT_CHECKBOX.MULTI],
 ];
 
 function Mbti({ id, setHandler }: QuesiotnProps) {
