@@ -24,8 +24,11 @@ const mbtiList1: [string, typeof OPT_CHECKBOX.MULTI][] = [
   ["ENFJ", OPT_CHECKBOX.MULTI],
   ["ENTJ", OPT_CHECKBOX.MULTI],
 ];
-const mbtiList2: [string, typeof OPT_CHECKBOX.MULTI][] = [
-  ["상관없음", OPT_CHECKBOX.MULTI],
+const mbtiList2: [
+  string,
+  typeof OPT_CHECKBOX.SINGLE | typeof OPT_CHECKBOX.MULTI
+][] = [
+  ["상관없음", OPT_CHECKBOX.SINGLE],
   ["ISTJ", OPT_CHECKBOX.MULTI],
   ["ISFJ", OPT_CHECKBOX.MULTI],
   ["INFJ", OPT_CHECKBOX.MULTI],
