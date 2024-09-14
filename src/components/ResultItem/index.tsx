@@ -124,7 +124,7 @@ const Item = styled.div`
   font-size: 20px;
   border-radius: 8px;
   padding: 4px 8px;
-  margin-top: 4px;
+  margin-top: 7px;
   display: inline-block;
   margin-left: 10px;
   white-space: nowrap;
