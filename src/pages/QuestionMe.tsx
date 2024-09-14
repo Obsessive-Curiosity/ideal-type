@@ -67,6 +67,7 @@ const QuestionMe = () => {
     if (hasAllValues(input)) {
       const newData: DataItem = { id, ...input };
       const existingData = data.find((item) => String(item.id) === String(id));
+      console.log(newData);
       if (existingData) {
         onUpdate(newData);
       } else {

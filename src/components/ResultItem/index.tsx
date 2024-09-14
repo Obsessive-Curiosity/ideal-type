@@ -20,10 +20,10 @@ const keyTranslations: { [key: string]: string } = {
   smoking: "흡연",
 };
 
-const translateKeys = (obj: DataItem) =>
+const translateKeys = (obj: Omit<DataItem, "id">): Record<string, string[]> =>
   Object.fromEntries(
     Object.entries(obj).map(([key, value]) => [
-      keyTranslations[key] || key, // 매핑된 한국어 키가 없으면 원래 키 사용
+      keyTranslations[key] || key,
       value,
     ])
   );
@@ -40,7 +40,7 @@ interface ResultItemProps {
 }
 
 const ResultItem = ({ meRef, youRef }: ResultItemProps) => {
-  const { data }: { data: DataItem[] } = useContext(QuestionStateContext);
+  const { data } = useContext(QuestionStateContext) as { data: DataItem[] };
   const ME = filterData(data, "1");
   const YOU = filterData(data, "2");
 
@@ -53,11 +53,9 @@ const ResultItem = ({ meRef, youRef }: ResultItemProps) => {
             {Object.entries(translateKeys(item)).map(([key, value]) => (
               <DataListItem key={key}>
                 <ItemTitle>{key}</ItemTitle>
-                {Array.isArray(value)
-                  ? value.map((v, idx) => <Item key={idx}>{String(v)}</Item>)
-                  : value
-                      .split(",")
-                      .map((v, idx) => <Item key={idx}>{v.trim()}</Item>)}
+                {value.map((v, idx) => (
+                  <Item key={idx}>{v}</Item>
+                ))}
               </DataListItem>
             ))}
           </div>
@@ -67,16 +65,16 @@ const ResultItem = ({ meRef, youRef }: ResultItemProps) => {
         <SectionTitle>YOU</SectionTitle>
         {YOU.map((item, index) => (
           <div key={index}>
-            {Object.entries(translateKeys(item)).map(([key, value]) => (
-              <DataListItem key={key}>
-                <ItemTitle>{key}</ItemTitle>
-                {Array.isArray(value)
-                  ? value.map((v, idx) => <Item key={idx}>{String(v)}</Item>)
-                  : value
-                      .split(",")
-                      .map((v, idx) => <Item key={idx}>{v.trim()}</Item>)}
-              </DataListItem>
-            ))}
+            {Object.entries(translateKeys(item)).map(
+              ([key, value]: [string, string[]]) => (
+                <DataListItem key={key}>
+                  <ItemTitle>{key}</ItemTitle>
+                  {value.map((v, idx) => (
+                    <Item key={idx}>{v}</Item>
+                  ))}
+                </DataListItem>
+              )
+            )}
           </div>
         ))}
       </DataList>
@@ -126,9 +124,9 @@ const Item = styled.div`
   border-radius: 8px;
   padding: 4px 8px;
   margin-top: 4px;
-  display: inline-block; /* 글자 크기에 맞게 너비 조정 */
-  margin-left: 10px; /* 키와 값 사이의 간격 추가 */
-  white-space: nowrap; /* 줄바꿈 방지 */
+  display: inline-block;
+  margin-left: 10px;
+  white-space: nowrap;
   &:first-child {
     margin-left: 0;
   }
