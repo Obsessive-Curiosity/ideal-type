@@ -31,9 +31,9 @@ const Home = () => {
   return (
     <HomeWrapper>
       <Header title={"반갑습니다!"} />
-      <PWrapper>
+      <DivWrapper>
         <p>사파리</p> 또는 <p>크롬</p> 브라우저를 사용해주세요!
-      </PWrapper>
+      </DivWrapper>
       <ContentWrapper>
         {isDone && (
           <>
@@ -72,7 +72,7 @@ const ContentWrapper = styled.div`
   margin: 0 auto;
   justify-content: center;
 `;
-const PWrapper = styled.p`
+const DivWrapper = styled.div`
   margin-top: 10px;
   text-align: center;
   font-size: 15px;

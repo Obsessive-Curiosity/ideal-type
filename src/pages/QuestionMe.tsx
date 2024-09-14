@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { createRef, useCallback, useContext, useState } from "react";
+import { createRef, useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header/index";
 import Footer from "../components/Footer/index";
@@ -72,11 +72,7 @@ const QuestionMe = () => {
       } else {
         onCreate(newData);
       }
-      if (isDone) {
-        nav("/");
-      } else {
-        nav("/questionYou");
-      }
+      nav(isDone ? "/" : "/questionYou");
     } else {
       const missingKeys = Object.keys(input).filter(
         (key) => input[key as keyof typeof input].length === 0
