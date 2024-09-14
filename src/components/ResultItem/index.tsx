@@ -114,13 +114,14 @@ const ItemTitle = styled.div`
   top: -13px;
   left: 12px;
   background-color: white;
-  padding: 3px;
+  padding: 0 3px;
+  font-size: 16px;
 `;
 
 const Item = styled.div`
   background-color: #c09cff33;
   color: black;
-  font-size: 13px;
+  font-size: 20px;
   border-radius: 8px;
   padding: 4px 8px;
   margin-top: 4px;
