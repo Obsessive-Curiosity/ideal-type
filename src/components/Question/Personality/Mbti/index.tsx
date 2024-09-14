@@ -30,7 +30,7 @@ function Mbti({ id, setHandler }: QuesiotnProps) {
   const { selectedItems, onChangeCheckbox } = useCheckbox([]);
 
   useEffect(() => {
-    setHandler("age", selectedItems);
+    setHandler("mbti", selectedItems);
   }, [selectedItems, setHandler]);
 
   return (
