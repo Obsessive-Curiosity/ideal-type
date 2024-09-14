@@ -6,7 +6,25 @@ import OPT_CHECKBOX from "../../../../constants/OPT_CHECKBOX";
 import useCheckbox from "../../../../hooks/useCheckbox";
 import CheckboxItem from "../../../QuestionItems/CheckboxItem";
 
-const mbtiList: [string, typeof OPT_CHECKBOX.MULTI][] = [
+const mbtiList1: [string, typeof OPT_CHECKBOX.MULTI][] = [
+  ["ISTJ", OPT_CHECKBOX.MULTI],
+  ["ISFJ", OPT_CHECKBOX.MULTI],
+  ["INFJ", OPT_CHECKBOX.MULTI],
+  ["INTJ", OPT_CHECKBOX.MULTI],
+  ["ISTP", OPT_CHECKBOX.MULTI],
+  ["ISFP", OPT_CHECKBOX.MULTI],
+  ["INFP", OPT_CHECKBOX.MULTI],
+  ["INTP", OPT_CHECKBOX.MULTI],
+  ["ESTP", OPT_CHECKBOX.MULTI],
+  ["ESFP", OPT_CHECKBOX.MULTI],
+  ["ENFP", OPT_CHECKBOX.MULTI],
+  ["ENTP", OPT_CHECKBOX.MULTI],
+  ["ESTJ", OPT_CHECKBOX.MULTI],
+  ["ESFJ", OPT_CHECKBOX.MULTI],
+  ["ENFJ", OPT_CHECKBOX.MULTI],
+  ["ENTJ", OPT_CHECKBOX.MULTI],
+];
+const mbtiList2: [string, typeof OPT_CHECKBOX.MULTI][] = [
   ["상관없음", OPT_CHECKBOX.MULTI],
   ["ISTJ", OPT_CHECKBOX.MULTI],
   ["ISFJ", OPT_CHECKBOX.MULTI],
@@ -28,6 +46,7 @@ const mbtiList: [string, typeof OPT_CHECKBOX.MULTI][] = [
 
 function Mbti({ id, setHandler }: QuesiotnProps) {
   const user = id === "1" ? "본인" : "상대방";
+  const mbtiList = id === "1" ? mbtiList1 : mbtiList2;
   const { selectedItems, onChangeCheckbox } = useCheckbox([]);
 
   useEffect(() => {
