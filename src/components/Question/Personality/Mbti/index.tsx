@@ -7,6 +7,7 @@ import useCheckbox from "../../../../hooks/useCheckbox";
 import CheckboxItem from "../../../QuestionItems/CheckboxItem";
 
 const mbtiList: [string, typeof OPT_CHECKBOX.MULTI][] = [
+  ["상관없음", OPT_CHECKBOX.MULTI],
   ["ISTJ", OPT_CHECKBOX.MULTI],
   ["ISFJ", OPT_CHECKBOX.MULTI],
   ["INFJ", OPT_CHECKBOX.MULTI],
