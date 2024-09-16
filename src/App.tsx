@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import { Routes, Route } from "react-router-dom";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 
 //pages
 import Home from "./pages/Home";
@@ -40,18 +40,18 @@ function reducer(state: DataItem[], action: ActionType): DataItem[] {
 function App() {
   const [data, dispatch] = useReducer(reducer, []);
 
-  // const setMobileHeight = () => {
-  //   const vh = window.innerHeight * 0.01;
-  //   document.documentElement.style.setProperty("--vh", `${vh}px`);
-  // };
+  const setMobileHeight = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  };
 
-  // useEffect(() => {
-  //   setMobileHeight();
+  useEffect(() => {
+    setMobileHeight();
 
-  //   // resize 이벤트가 발생하면 다시 계산하도록 아래 코드 추가
-  //   window.addEventListener("resize", setMobileHeight);
-  //   return () => window.removeEventListener("resize", setMobileHeight);
-  // }, []);
+    // resize 이벤트가 발생하면 다시 계산하도록 아래 코드 추가
+    window.addEventListener("resize", setMobileHeight);
+    return () => window.removeEventListener("resize", setMobileHeight);
+  }, []);
 
   // onCreate 함수
   const onCreate = (newData: DataItem) => {
@@ -120,7 +120,7 @@ const GlobalStyle = createGlobalStyle`
     width:100%;
     max-width: 600px;
     margin: 0 auto;
-    height: 50%;
+    height: calc(var(--vh, 1vh) * 100);
     box-shadow: rgb(100,100,100, 0.2) 0px 0px 29px 0px;
     padding: 0px 20px;
   }
