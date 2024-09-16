@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import { Routes, Route } from "react-router-dom";
-import { useEffect, useReducer } from "react";
+import { useReducer } from "react";
 
 //pages
 import Home from "./pages/Home";

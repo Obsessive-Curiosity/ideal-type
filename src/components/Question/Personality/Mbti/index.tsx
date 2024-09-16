@@ -9,7 +9,6 @@ import styled from "styled-components";
 import QuestionWrapper from "../../../../styles/QuestionWrapper";
 import QuesiotnProps from "../../../../interfaces/QuestionProps";
 import QuestionStateContext from "../../../../contexts/QuestionStateContext";
-import getInitialData from "../../../../features/getInitialData";
 import MbtiButtonItem from "../../../QuestionItems/MbtiButtonItem";
 
 // 액션 타입 정의
@@ -36,7 +35,7 @@ function reducer(state: string[], action: ActionType): string[] {
 function Mbti({ type, setHandler }: QuesiotnProps) {
   const ME = "ME";
   const user = type === ME ? "본인" : "상대방";
-  const { data } = useContext(QuestionStateContext);
+  // const { data } = useContext(QuestionStateContext);
   const [selectedItems, dispatch] = useReducer(reducer, ["____"]);
   const [buttonCount, setButtonCount] = useState<number>(selectedItems.length); // 초기 버튼 개수
 
