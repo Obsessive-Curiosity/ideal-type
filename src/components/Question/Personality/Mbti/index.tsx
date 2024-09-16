@@ -1,6 +1,6 @@
 import {
   useState,
-  useContext,
+  // useContext,
   useEffect,
   useReducer,
   useCallback,
@@ -8,7 +8,7 @@ import {
 import styled from "styled-components";
 import QuestionWrapper from "../../../../styles/QuestionWrapper";
 import QuesiotnProps from "../../../../interfaces/QuestionProps";
-import QuestionStateContext from "../../../../contexts/QuestionStateContext";
+// import QuestionStateContext from "../../../../contexts/QuestionStateContext";
 import MbtiButtonItem from "../../../QuestionItems/MbtiButtonItem";
 
 // 액션 타입 정의
