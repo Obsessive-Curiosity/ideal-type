@@ -50,7 +50,7 @@ const MbtiButtonItem = ({ index, onChangeUpdate }: MbtiButtonItemProps) => {
       .join("");
 
     onChangeUpdate(index, newValue);
-  }, [currentIndex, index]);
+  }, [currentIndex, index, onChangeUpdate]);
 
   return (
     <MbtiBtnsWrapper>

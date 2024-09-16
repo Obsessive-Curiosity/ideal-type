@@ -1,4 +1,10 @@
-import { useState, useContext, useEffect, useReducer } from "react";
+import {
+  useState,
+  useContext,
+  useEffect,
+  useReducer,
+  useCallback,
+} from "react";
 import styled from "styled-components";
 import QuestionWrapper from "../../../../styles/QuestionWrapper";
 import QuesiotnProps from "../../../../interfaces/QuestionProps";
@@ -51,9 +57,9 @@ function Mbti({ type, setHandler }: QuesiotnProps) {
     dispatch({ type: "DELETE" });
   };
 
-  const onChangeUpdate = (index: number, value: string) => {
+  const onChangeUpdate = useCallback((index: number, value: string) => {
     dispatch({ type: "UPDATE", index, value });
-  };
+  }, []);
 
   return (
     <QuestionWrapper>
