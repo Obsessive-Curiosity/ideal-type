@@ -97,7 +97,6 @@ const GlobalStyle = createGlobalStyle`
 
   html, body {
     width: 100%;
-    height: 100dvh;
     background-color: rgb(246,246,246);
   }
 
@@ -106,7 +105,7 @@ const GlobalStyle = createGlobalStyle`
     width:100%;
     max-width: 600px;
     margin: 0 auto;
-    min-height: 100vh;
+    min-height: 100dvh;
     box-shadow: rgb(100,100,100, 0.2) 0px 0px 29px 0px;
     padding: 0px 20px;
   }
