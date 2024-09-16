@@ -112,15 +112,15 @@ const GlobalStyle = createGlobalStyle`
     position: relative;
     background-color: rgb(246,246,246);
     width: 100%;
-    min-height: calc(var(--vh, 1vh) * 100);
+    height: calc(var(--vh, 1vh) * 100);
   }
 
   #root{
     background-color:white;
     max-width: 600px;
+    min-height: 100%;
     margin: 0 auto;
     box-shadow: rgb(100,100,100, 0.2) 0px 0px 29px 0px;
     padding: 0px 20px;
-    height: 100svh;
   }
 `;
