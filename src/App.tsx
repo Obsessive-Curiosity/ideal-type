@@ -49,11 +49,6 @@ function App() {
     setVh(); // 처음 렌더링될 때 vh 설정
     window.addEventListener("resize", setVh); // 창 크기 변경 시
     window.addEventListener("scroll", setVh); // 스크롤 시 주소창이 숨겨질 때 적용
-
-    return () => {
-      window.removeEventListener("resize", setVh);
-      window.removeEventListener("scroll", setVh); // 컴포넌트가 언마운트될 때 리스너 제거
-    };
   }, []);
 
   // onCreate 함수
