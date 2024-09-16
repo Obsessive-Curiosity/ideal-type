@@ -120,7 +120,7 @@ const GlobalStyle = createGlobalStyle`
     width:100%;
     max-width: 600px;
     margin: 0 auto;
-    min-height: 100svh;
+    height: auto;
     box-shadow: rgb(100,100,100, 0.2) 0px 0px 29px 0px;
     padding: 0px 20px;
   }
