@@ -109,12 +109,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
+    min-height: 100vh;
     overflow: hidden; /* 스크롤을 방지합니다 */
     background-color: rgb(246,246,246);
+    @supports (-webkit-touch-callout: none) {
+    min-height: -webkit-fill-available;
+  }
   }
 
 
