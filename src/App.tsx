@@ -109,18 +109,23 @@ const GlobalStyle = createGlobalStyle`
   }
 
   html, body {
-    position: relative;
-    background-color: rgb(246,246,246);
+    margin: 0;
+    padding: 0;
+    height: 100%;
     width: 100%;
-    height: calc(var(--vh, 1vh) * 100);
+    overflow: hidden; /* 스크롤을 방지합니다 */
+    background-color: rgb(246,246,246);
   }
 
-  #root{
-    background-color:white;
+
+  #root {
+    background-color: white;
     max-width: 600px;
-    min-height: 100%;
+    min-height: 100vh; /* 전체 뷰포트 높이 */
     margin: 0 auto;
     box-shadow: rgb(100,100,100, 0.2) 0px 0px 29px 0px;
     padding: 0px 20px;
+    display: flex;
+    flex-direction: column;
   }
 `;
