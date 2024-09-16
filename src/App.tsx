@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import { Routes, Route } from "react-router-dom";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 
 //pages
 import Home from "./pages/Home";
@@ -39,6 +39,18 @@ function reducer(state: DataItem[], action: ActionType): DataItem[] {
 
 function App() {
   const [data, dispatch] = useReducer(reducer, []);
+
+  // vh 값을 설정하는 함수
+  const setVh = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  };
+
+  useEffect(() => {
+    setVh(); // 앱이 처음 렌더링될 때 vh 값을 설정
+    window.addEventListener("resize", setVh); // 창 크기가 바뀔 때 vh 값을 업데이트
+    return () => window.removeEventListener("resize", setVh); // 컴포넌트 언마운트 시 리스너 제거
+  }, []);
 
   // onCreate 함수
   const onCreate = (newData: DataItem) => {
@@ -105,7 +117,7 @@ const GlobalStyle = createGlobalStyle`
     width:100%;
     max-width: 600px;
     margin: 0 auto;
-    min-height: 100dvh;
+    min-height: calc(var(--vh, 1vh) * 100);
     box-shadow: rgb(100,100,100, 0.2) 0px 0px 29px 0px;
     padding: 0px 20px;
   }
