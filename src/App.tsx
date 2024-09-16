@@ -40,15 +40,17 @@ function reducer(state: DataItem[], action: ActionType): DataItem[] {
 function App() {
   const [data, dispatch] = useReducer(reducer, []);
 
-  const setVh = () => {
+  const setMobileHeight = () => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   };
 
   useEffect(() => {
-    setVh(); // 처음 렌더링될 때 vh 설정
-    window.addEventListener("resize", setVh); // 창 크기 변경 시
-    window.addEventListener("scroll", setVh); // 스크롤 시 주소창이 숨겨질 때 적용
+    setMobileHeight();
+
+    // resize 이벤트가 발생하면 다시 계산하도록 아래 코드 추가
+    window.addEventListener("resize", setMobileHeight);
+    return () => window.removeEventListener("resize", setMobileHeight);
   }, []);
 
   // onCreate 함수
