@@ -40,16 +40,20 @@ function reducer(state: DataItem[], action: ActionType): DataItem[] {
 function App() {
   const [data, dispatch] = useReducer(reducer, []);
 
-  // vh 값을 설정하는 함수
   const setVh = () => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   };
 
   useEffect(() => {
-    setVh(); // 앱이 처음 렌더링될 때 vh 값을 설정
-    window.addEventListener("resize", setVh); // 창 크기가 바뀔 때 vh 값을 업데이트
-    return () => window.removeEventListener("resize", setVh); // 컴포넌트 언마운트 시 리스너 제거
+    setVh(); // 처음 렌더링될 때 vh 설정
+    window.addEventListener("resize", setVh); // 창 크기 변경 시
+    window.addEventListener("scroll", setVh); // 스크롤 시 주소창이 숨겨질 때 적용
+
+    return () => {
+      window.removeEventListener("resize", setVh);
+      window.removeEventListener("scroll", setVh); // 컴포넌트가 언마운트될 때 리스너 제거
+    };
   }, []);
 
   // onCreate 함수
