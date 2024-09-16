@@ -110,7 +110,6 @@ const GlobalStyle = createGlobalStyle`
 
   html, body {
     height: calc(var(--vh, 1vh) * 100);
-    overflow: hidden; /* 스크롤을 방지합니다 */
     background-color: rgb(246,246,246);
     display: flex;
     flex-direction: column;
