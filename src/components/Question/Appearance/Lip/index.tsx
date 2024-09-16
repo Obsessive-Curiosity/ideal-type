@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import QuesiotnProps from "../../../../interfaces/QuestionProps";
 import QuestionWrapper from "../../../../styles/QuestionWrapper";
 import CheckboxItem from "../../../QuestionItems/CheckboxItem";
 import OPT_CHECKBOX from "../../../../constants/OPT_CHECKBOX";
 import useCheckbox from "../../../../hooks/useCheckbox";
+import QuestionStateContext from "../../../../contexts/QuestionStateContext";
+import getInitialData from "../../../../features/getInitialData";
 
 const lipList1: [string, typeof OPT_CHECKBOX.SINGLE][] = [
   ["얇은 입술", OPT_CHECKBOX.SINGLE],
@@ -17,10 +19,14 @@ const lipList2: [string, typeof OPT_CHECKBOX.MULTI][] = [
   ["두꺼운 입술", OPT_CHECKBOX.MULTI],
 ];
 
-const Lip = ({ id, setHandler }: QuesiotnProps) => {
-  const user = id === "1" ? "본인" : "상대방";
-  const lipList = id === "1" ? lipList1 : lipList2;
-  const { selectedItems, onChangeCheckbox } = useCheckbox([]);
+const Lip = ({ type, setHandler }: QuesiotnProps) => {
+  const ME = "ME";
+  const user = type === ME ? "본인" : "상대방";
+  const lipList = type === ME ? lipList1 : lipList2;
+  const { data } = useContext(QuestionStateContext);
+  const { selectedItems, onChangeCheckbox } = useCheckbox(
+    getInitialData(type, data, "lip")
+  );
 
   useEffect(() => {
     setHandler("lip", selectedItems);

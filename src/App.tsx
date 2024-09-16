@@ -16,19 +16,6 @@ import DataItem from "./interfaces/DataItem";
 import QuestionStateContext from "./contexts/QuestionStateContext";
 import QuestionDispatchContext from "./contexts/QuestionDispatchContext";
 
-// 로컬 스토리지에서 데이터 로드
-const STORAGE_KEY = "data-items";
-
-const loadDataFromLocalStorage = (): DataItem[] => {
-  const data = localStorage.getItem(STORAGE_KEY);
-  return data ? JSON.parse(data) : [];
-};
-
-// 로컬 스토리지에 데이터 저장
-const saveDataToLocalStorage = (data: DataItem[]) => {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-};
-
 // 액션 타입 정의
 type ActionType =
   | { type: "CREATE"; data: DataItem }
@@ -41,7 +28,7 @@ function reducer(state: DataItem[], action: ActionType): DataItem[] {
       return [action.data, ...state];
     case "UPDATE":
       return state.map((item) =>
-        String(item.id) === String(action.data.id) ? action.data : item
+        item.type === action.data.type ? action.data : item
       );
     case "RESET":
       return [];
@@ -51,12 +38,7 @@ function reducer(state: DataItem[], action: ActionType): DataItem[] {
 }
 
 function App() {
-  const [data, dispatch] = useReducer(reducer, loadDataFromLocalStorage());
-
-  // 상태가 변경될 때마다 로컬 스토리지에 저장
-  useEffect(() => {
-    saveDataToLocalStorage(data);
-  }, [data]);
+  const [data, dispatch] = useReducer(reducer, []);
 
   // onCreate 함수
   const onCreate = (newData: DataItem) => {

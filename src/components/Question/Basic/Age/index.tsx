@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import QuesiotnProps from "../../../../interfaces/QuestionProps";
 import QuestionWrapper from "../../../../styles/QuestionWrapper";
 import CheckboxItem from "../../../QuestionItems/CheckboxItem";
 import OPT_CHECKBOX from "../../../../constants/OPT_CHECKBOX";
 import useCheckbox from "../../../../hooks/useCheckbox";
+import getInitialData from "../../../../features/getInitialData";
+import QuestionStateContext from "../../../../contexts/QuestionStateContext";
 
 const ageList1: [string, typeof OPT_CHECKBOX.SINGLE][] = [
   ["19세 미만", OPT_CHECKBOX.SINGLE],
@@ -33,10 +35,14 @@ const ageList2: [string, typeof OPT_CHECKBOX.MULTI][] = [
   ["50대 후반", OPT_CHECKBOX.MULTI],
 ];
 
-const Age = ({ id, setHandler }: QuesiotnProps) => {
-  const user = id === "1" ? "본인" : "상대방";
-  const ageList = id === "1" ? ageList1 : ageList2;
-  const { selectedItems, onChangeCheckbox } = useCheckbox([]);
+const Age = ({ type, setHandler }: QuesiotnProps) => {
+  const ME = "ME";
+  const user = type === ME ? "본인" : "상대방";
+  const ageList = type === ME ? ageList1 : ageList2;
+  const { data } = useContext(QuestionStateContext);
+  const { selectedItems, onChangeCheckbox } = useCheckbox(
+    getInitialData(type, data, "age")
+  );
 
   useEffect(() => {
     setHandler("age", selectedItems);

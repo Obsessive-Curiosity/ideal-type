@@ -1,12 +1,13 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import QuesiotnProps from "../../../../interfaces/QuestionProps";
 import QuestionWrapper from "../../../../styles/QuestionWrapper";
 import SelectItem from "../../../QuestionItems/SelectItem";
 import CheckboxItem from "../../../QuestionItems/CheckboxItem";
 import OPT_CHECKBOX from "../../../../constants/OPT_CHECKBOX";
 import useCheckbox from "../../../../hooks/useCheckbox";
+import getInitialData from "../../../../features/getInitialData";
+import QuestionStateContext from "../../../../contexts/QuestionStateContext";
 
-// `SelectItem`이 받을 수 있는 형태로 리스트를 정의합니다.
 const regionList: [string, typeof OPT_CHECKBOX.MULTI][] = [
   ["서울", OPT_CHECKBOX.MULTI],
   ["경기도", OPT_CHECKBOX.MULTI],
@@ -24,10 +25,12 @@ const regionList: [string, typeof OPT_CHECKBOX.MULTI][] = [
   ["제주도", OPT_CHECKBOX.MULTI],
 ];
 
-const Region = ({ id, setHandler }: QuesiotnProps) => {
-  const user = id === "1" ? "본인" : "상대방";
+const Region = ({ type, setHandler }: QuesiotnProps) => {
+  const ME = "ME";
+  const user = type === ME ? "본인" : "상대방";
+  const { data } = useContext(QuestionStateContext);
   const { selectedItems, onChangeCheckbox } = useCheckbox(
-    id === "1" ? ["서울"] : []
+    getInitialData(type, data, "region")
   );
 
   useEffect(() => {
@@ -38,12 +41,12 @@ const Region = ({ id, setHandler }: QuesiotnProps) => {
     <QuestionWrapper>
       <h2>{user}의 사는 지역을 선택해주세요.</h2>
       <p>💡한국지역 기준</p>
-      {id === "1" && (
+      {type === ME && (
         <SelectItem
           optList={regionList.map(([item]) => item)} // optList에 문자열 배열 전달
         />
       )}
-      {id === "2" &&
+      {type !== ME &&
         regionList.map(([item, type], idx) => (
           <CheckboxItem
             key={idx}

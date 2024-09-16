@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import QuesiotnProps from "../../../../interfaces/QuestionProps";
 import QuestionWrapper from "../../../../styles/QuestionWrapper";
 import CheckboxItem from "../../../QuestionItems/CheckboxItem";
 import OPT_CHECKBOX from "../../../../constants/OPT_CHECKBOX";
 import useCheckbox from "../../../../hooks/useCheckbox";
+import QuestionStateContext from "../../../../contexts/QuestionStateContext";
+import getInitialData from "../../../../features/getInitialData";
 
 const smokingList1: [
   string,
@@ -19,10 +21,14 @@ const smokingList2: [string, typeof OPT_CHECKBOX.MULTI][] = [
   ["연초", OPT_CHECKBOX.MULTI],
 ];
 
-const Smoking = ({ id, setHandler }: QuesiotnProps) => {
-  const user = id === "1" ? "본인" : "상대방";
-  const smokingList = id === "1" ? smokingList1 : smokingList2;
-  const { selectedItems, onChangeCheckbox } = useCheckbox([]);
+const Smoking = ({ type, setHandler }: QuesiotnProps) => {
+  const ME = "ME";
+  const user = type === ME ? "본인" : "상대방";
+  const smokingList = type === ME ? smokingList1 : smokingList2;
+  const { data } = useContext(QuestionStateContext);
+  const { selectedItems, onChangeCheckbox } = useCheckbox(
+    getInitialData(type, data, "smoking")
+  );
 
   useEffect(() => {
     setHandler("smoking", selectedItems);

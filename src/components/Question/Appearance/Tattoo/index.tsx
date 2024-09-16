@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import QuesiotnProps from "../../../../interfaces/QuestionProps";
 import QuestionWrapper from "../../../../styles/QuestionWrapper";
 import CheckboxItem from "../../../QuestionItems/CheckboxItem";
 import OPT_CHECKBOX from "../../../../constants/OPT_CHECKBOX";
 import useCheckbox from "../../../../hooks/useCheckbox";
+import QuestionStateContext from "../../../../contexts/QuestionStateContext";
+import getInitialData from "../../../../features/getInitialData";
 
 const tattooList1: [
   string,
@@ -19,10 +21,14 @@ const tattooList2: [string, typeof OPT_CHECKBOX.MULTI][] = [
   ["아기자기한 작은 타투", OPT_CHECKBOX.MULTI],
 ];
 
-const Tattoo = ({ id, setHandler }: QuesiotnProps) => {
-  const user = id === "1" ? "본인" : "상대방";
-  const tattooList = id === "1" ? tattooList1 : tattooList2;
-  const { selectedItems, onChangeCheckbox } = useCheckbox([]);
+const Tattoo = ({ type, setHandler }: QuesiotnProps) => {
+  const ME = "ME";
+  const user = type === ME ? "본인" : "상대방";
+  const tattooList = type === ME ? tattooList1 : tattooList2;
+  const { data } = useContext(QuestionStateContext);
+  const { selectedItems, onChangeCheckbox } = useCheckbox(
+    getInitialData(type, data, "tattoo")
+  );
 
   useEffect(() => {
     setHandler("tattoo", selectedItems);

@@ -20,7 +20,7 @@ const keyTranslations: { [key: string]: string } = {
   smoking: "흡연",
 };
 
-const translateKeys = (obj: Omit<DataItem, "id">): Record<string, string[]> =>
+const translateKeys = (obj: Omit<DataItem, "type">): Record<string, string[]> =>
   Object.fromEntries(
     Object.entries(obj).map(([key, value]) => [
       keyTranslations[key] || key,
@@ -28,9 +28,9 @@ const translateKeys = (obj: Omit<DataItem, "id">): Record<string, string[]> =>
     ])
   );
 
-const filterData = (data: DataItem[], id: string) => {
-  const findDataWithId = (item: DataItem) => item.id === id;
-  const deleteId = ({ id, ...rest }: DataItem) => rest;
+const filterData = (data: DataItem[], type: string) => {
+  const findDataWithId = (item: DataItem) => item.type === type;
+  const deleteId = ({ type, ...rest }: DataItem) => rest;
   return data.filter(findDataWithId).map(deleteId);
 };
 
@@ -41,8 +41,8 @@ interface ResultItemProps {
 
 const ResultItem = ({ meRef, youRef }: ResultItemProps) => {
   const { data } = useContext(QuestionStateContext) as { data: DataItem[] };
-  const ME = filterData(data, "1");
-  const YOU = filterData(data, "2");
+  const ME = filterData(data, "ME");
+  const YOU = filterData(data, "YOU");
 
   return (
     <>

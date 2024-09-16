@@ -16,13 +16,13 @@ import Religion from "../Question/Life/Religion";
 import Smoking from "../Question/Life/Smoking";
 
 interface UserQuestionProps {
-  id: string; // id의 타입 정의
+  type: string;
   input: { [key: string]: string[] }; // input의 타입 정의
   setHandler: (name: string, value: string[]) => void; // setHandler 함수의 타입 정의
   refs: { [key: string]: React.RefObject<HTMLDivElement> }; // refs를 props로 받음
 }
 
-const UserQuestion = ({ id, input, setHandler, refs }: UserQuestionProps) => {
+const UserQuestion = ({ type, input, setHandler, refs }: UserQuestionProps) => {
   const isAdult = !input.age.includes("19세 미만");
 
   useEffect(() => {
@@ -38,55 +38,55 @@ const UserQuestion = ({ id, input, setHandler, refs }: UserQuestionProps) => {
   return (
     <UserQuestionWrapper>
       <div ref={refs.age}>
-        <Age id={id} setHandler={setHandler} />
+        <Age type={type} setHandler={setHandler} />
       </div>
       {isAdult && (
         <div ref={refs.tendency}>
-          <Tendency id={id} setHandler={setHandler} />
+          <Tendency type={type} setHandler={setHandler} />
         </div>
       )}
       <div ref={refs.region}>
-        <Region id={id} setHandler={setHandler} />
+        <Region type={type} setHandler={setHandler} />
       </div>
       <div ref={refs.clothingStyle}>
-        <ClothingStyle id={id} setHandler={setHandler} />
+        <ClothingStyle type={type} setHandler={setHandler} />
       </div>
       <div ref={refs.eye}>
-        <Eye id={id} setHandler={setHandler} />
+        <Eye type={type} setHandler={setHandler} />
       </div>
       <div ref={refs.hair}>
-        <Hair id={id} setHandler={setHandler} />
+        <Hair type={type} setHandler={setHandler} />
       </div>
       <div ref={refs.height}>
-        <Height id={id} setHandler={setHandler} />
+        <Height type={type} setHandler={setHandler} />
       </div>
       <div ref={refs.lip}>
-        <Lip id={id} setHandler={setHandler} />
+        <Lip type={type} setHandler={setHandler} />
       </div>
       {isAdult && (
         <div ref={refs.tattoo}>
-          <Tattoo id={id} setHandler={setHandler} />
+          <Tattoo type={type} setHandler={setHandler} />
         </div>
       )}
       <div ref={refs.mbti}>
-        <Mbti id={id} setHandler={setHandler} />
+        <Mbti type={type} setHandler={setHandler} />
       </div>
       {isAdult && (
         <div ref={refs.beer}>
-          <Beer id={id} setHandler={setHandler} />
+          <Beer type={type} setHandler={setHandler} />
         </div>
       )}
       {isAdult && (
         <div ref={refs.night}>
-          <Night id={id} setHandler={setHandler} />
+          <Night type={type} setHandler={setHandler} />
         </div>
       )}
       <div ref={refs.religion}>
-        <Religion id={id} setHandler={setHandler} />
+        <Religion type={type} setHandler={setHandler} />
       </div>
       {isAdult && (
         <div ref={refs.smoking}>
-          <Smoking id={id} setHandler={setHandler} />
+          <Smoking type={type} setHandler={setHandler} />
         </div>
       )}
     </UserQuestionWrapper>

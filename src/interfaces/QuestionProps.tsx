@@ -1,5 +1,5 @@
 interface QuesiotnProps {
-  id: string;
+  type: string;
   setHandler: (name: string, value: string[]) => void; // 타입 수정
 }
 

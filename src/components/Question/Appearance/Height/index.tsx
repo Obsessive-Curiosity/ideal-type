@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import QuesiotnProps from "../../../../interfaces/QuestionProps";
 import QuestionWrapper from "../../../../styles/QuestionWrapper";
 import CheckboxItem from "../../../QuestionItems/CheckboxItem";
 import OPT_CHECKBOX from "../../../../constants/OPT_CHECKBOX";
 import useCheckbox from "../../../../hooks/useCheckbox";
+import QuestionStateContext from "../../../../contexts/QuestionStateContext";
+import getInitialData from "../../../../features/getInitialData";
 
 const heightList1: [string, typeof OPT_CHECKBOX.SINGLE][] = [
   ["140cm 미만", OPT_CHECKBOX.SINGLE],
@@ -33,10 +35,14 @@ const heightList2: [string, typeof OPT_CHECKBOX.MULTI][] = [
   ["180cm 이상", OPT_CHECKBOX.MULTI],
 ];
 
-const Height = ({ id, setHandler }: QuesiotnProps) => {
-  const user = id === "1" ? "본인" : "상대방";
-  const heightList = id === "1" ? heightList1 : heightList2;
-  const { selectedItems, onChangeCheckbox } = useCheckbox([]);
+const Height = ({ type, setHandler }: QuesiotnProps) => {
+  const ME = "ME";
+  const user = type === ME ? "본인" : "상대방";
+  const heightList = type === ME ? heightList1 : heightList2;
+  const { data } = useContext(QuestionStateContext);
+  const { selectedItems, onChangeCheckbox } = useCheckbox(
+    getInitialData(type, data, "height")
+  );
 
   useEffect(() => {
     setHandler("height", selectedItems);

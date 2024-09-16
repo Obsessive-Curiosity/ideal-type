@@ -45,7 +45,7 @@ const initialState = {
 
 const QuestionMe = () => {
   const nav = useNavigate();
-  const id = "1";
+  const type = "ME";
   const { data } = useContext(QuestionStateContext);
   const { onCreate, onUpdate } = useContext(QuestionDispatchContext);
   const [input, setInput] = useState(initialState);
@@ -65,9 +65,8 @@ const QuestionMe = () => {
 
   const onClickSubmit = () => {
     if (hasAllValues(input)) {
-      const newData: DataItem = { id, ...input };
-      const existingData = data.find((item) => String(item.id) === String(id));
-      console.log(newData);
+      const newData: DataItem = { type, ...input };
+      const existingData = data.find((item) => item.type === type);
       if (existingData) {
         onUpdate(newData);
       } else {
@@ -88,7 +87,7 @@ const QuestionMe = () => {
         <Header title={"자기소개표 만들기"} />
         <ContentWrapper>
           <UserQuestion
-            id={id}
+            type={type}
             input={input}
             setHandler={setHandler}
             refs={refs}

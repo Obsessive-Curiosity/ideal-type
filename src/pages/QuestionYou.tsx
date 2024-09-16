@@ -45,7 +45,7 @@ const initialState = {
 
 const QuestionYou = () => {
   const nav = useNavigate();
-  const id = "2";
+  const type = "YOU";
   const { data } = useContext(QuestionStateContext);
   const { onCreate, onUpdate } = useContext(QuestionDispatchContext);
   const [input, setInput] = useState(initialState);
@@ -64,8 +64,8 @@ const QuestionYou = () => {
 
   const onClickSubmit = () => {
     if (hasAllValues(input)) {
-      const newData: DataItem = { id, ...input };
-      const existingData = data.find((item) => String(item.id) === String(id));
+      const newData: DataItem = { type, ...input };
+      const existingData = data.find((item) => item.type === type);
       if (existingData) {
         onUpdate(newData);
       } else {
@@ -86,7 +86,7 @@ const QuestionYou = () => {
         <Header title={"이상형표 만들기"} />
         <ContentWrapper>
           <UserQuestion
-            id={id}
+            type={type}
             input={input}
             setHandler={setHandler}
             refs={refs}

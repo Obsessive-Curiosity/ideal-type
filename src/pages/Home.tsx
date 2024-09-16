@@ -35,14 +35,13 @@ const Home = () => {
         <p>사파리</p> 또는 <p>크롬</p> 브라우저를 사용해주세요!
       </DivWrapper>
       <ContentWrapper>
-        {isDone && (
+        {isDone ? (
           <>
             <QuestionBtn text={"자기소개표 수정하기"} onClick={onClickMe} />
             <QuestionBtn text={"이상형표 수정하기"} onClick={onClickYou} />
             <QuestionBtn text={"다시 시작하기"} onClick={onClickReset} />
           </>
-        )}
-        {!isDone && (
+        ) : (
           <>
             <QuestionBtn text={"시작하기"} onClick={onClickMe} />
           </>

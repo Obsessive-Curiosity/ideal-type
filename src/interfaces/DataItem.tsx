@@ -1,6 +1,6 @@
 // DataItem 타입 정의
 interface DataItem {
-  id: string | undefined;
+  type: string;
   age: string[];
   region: string[];
   tendency: string[];
