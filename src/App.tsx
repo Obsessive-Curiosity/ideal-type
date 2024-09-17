@@ -38,10 +38,11 @@ function reducer(state: DataItem[], action: ActionType): DataItem[] {
 }
 
 function App() {
-  const storedData = localStorage.getItem("questionData");
+  // const storedData = localStorage.getItem("questionData");
   const [data, dispatch] = useReducer(
     reducer,
-    storedData ? JSON.parse(storedData) : []
+    []
+    // storedData ? JSON.parse(storedData) : []
   );
 
   // 로컬 스토리지에 데이터를 저장
