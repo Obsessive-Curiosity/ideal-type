@@ -112,12 +112,13 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     background-color: rgb(246,246,246);
     background-color: yellow;
+    height: calc(var(--vh, 1vh) * 100);
   }
 
   #root {
     background-color: white;
     max-width: 600px;
-    height: calc(var(--vh, 1vh) * 100);
+    height: 100%;
     margin: 0 auto;
     box-shadow: rgb(100,100,100, 0.2) 0px 0px 29px 0px;
     padding: 0px 20px;
