@@ -67,12 +67,18 @@ const QuestionMe = () => {
     if (hasAllValues(input)) {
       const newData: DataItem = { type, ...input };
       const existingData = data.find((item) => item.type === type);
+
       if (existingData) {
         onUpdate(newData);
       } else {
         onCreate(newData);
       }
-      nav(isDone ? "/" : "/questionYou");
+
+      if (isDone) {
+        nav("/", { replace: true });
+      } else {
+        nav("/questionYou");
+      }
     } else {
       const missingKeys = Object.keys(input).filter(
         (key) => input[key as keyof typeof input].length === 0
