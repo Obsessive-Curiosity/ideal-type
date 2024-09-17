@@ -92,8 +92,8 @@ const QuestionMe = () => {
             setHandler={setHandler}
             refs={refs}
           />
+          <Footer title={"제출하기"} onClick={onClickSubmit} />
         </ContentWrapper>
-        <Footer title={"제출하기"} onClick={onClickSubmit} />
       </QuestionWrapper>
     </>
   );
