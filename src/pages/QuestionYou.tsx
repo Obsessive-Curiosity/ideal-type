@@ -102,16 +102,14 @@ export default QuestionYou;
 const QuestionWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  padding-bottom: auto;
-  justify-content: space-between;
+  height: 100svh;
 `;
 
 const ContentWrapper = styled.div`
+  height: 70%;
   display: flex;
-  flex: 1; /* 남은 공간을 모두 차지 */
   flex-direction: column;
-  margin: 0 auto;
+  flex: 1;
   justify-content: center; /* 콘텐츠 중앙 정렬 */
   box-sizing: border-box; /* 패딩과 여백을 포함한 크기 조정 */
 
