@@ -17,7 +17,6 @@ const index = ({ title, onClick }: FooterProps) => {
 export default index;
 
 const FooterWrapper = styled.footer`
-  position: fixed;
   display: flex;
   align-items: center;
   padding: 20px 0;

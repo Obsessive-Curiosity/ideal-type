@@ -110,8 +110,7 @@ const GlobalStyle = createGlobalStyle`
 
   html, body {
     width: 100%;
-    background-color: rgb(246,246,246);
-    background-color: yellow;
+    background-color: #694e99;
     height: calc(var(--vh, 1vh) * 100);
   }
 
