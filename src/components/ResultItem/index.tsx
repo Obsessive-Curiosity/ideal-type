@@ -42,8 +42,6 @@ const filterMbti = (value: string[]): string[] => {
     return v.replace(/_/g, "");
   });
 
-  console.log(filteredMbti);
-
   filteredMbti.forEach((mbti) => {
     const matchingItems = MBTI_LIST.filter((mbtiListItem) => {
       return mbti.split("").every((char) => mbtiListItem.includes(char));
