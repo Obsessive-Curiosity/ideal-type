@@ -103,7 +103,8 @@ export default QuestionMe;
 const QuestionWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100svh;
+  overflow: scroll;
   padding-bottom: auto;
   justify-content: space-between;
 `;
