@@ -103,9 +103,8 @@ export default QuestionMe;
 const QuestionWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100%;
-  padding-bottom: auto;
   justify-content: space-between;
+  flex: 1; /* 부모의 남은 높이를 모두 차지 */
 `;
 
 const ContentWrapper = styled.div`
