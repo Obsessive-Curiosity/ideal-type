@@ -85,14 +85,14 @@ const QuestionMe = () => {
     <>
       <QuestionWrapper>
         <Header title={"자기소개표 만들기"} />
-        {/* <ContentWrapper> */}
-        <UserQuestion
-          type={type}
-          input={input}
-          setHandler={setHandler}
-          refs={refs}
-        />
-        {/* </ContentWrapper> */}
+        <ContentWrapper>
+          <UserQuestion
+            type={type}
+            input={input}
+            setHandler={setHandler}
+            refs={refs}
+          />
+        </ContentWrapper>
         <Footer title={"제출하기"} onClick={onClickSubmit} />
       </QuestionWrapper>
     </>
@@ -104,18 +104,17 @@ const QuestionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100svh;
-  overflow: scroll;
 `;
 
-// const ContentWrapper = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   flex: 1;
-//   margin: 0 auto;
-//   justify-content: center; /* 콘텐츠 중앙 정렬 */
-//   box-sizing: border-box; /* 패딩과 여백을 포함한 크기 조정 */
+const ContentWrapper = styled.div`
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center; /* 콘텐츠 중앙 정렬 */
+  box-sizing: border-box; /* 패딩과 여백을 포함한 크기 조정 */
 
-//   @media (max-width: 600px) {
-//     font-size: 12px; /* 모바일에서 폰트 크기 조정 */
-//   }
-// `;
+  @media (max-width: 600px) {
+    font-size: 12px; /* 모바일에서 폰트 크기 조정 */
+  }
+`;
