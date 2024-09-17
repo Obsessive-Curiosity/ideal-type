@@ -17,13 +17,13 @@ const index = ({ title, onClick }: FooterProps) => {
 export default index;
 
 const FooterWrapper = styled.footer`
+  position: fixed;
   display: flex;
   align-items: center;
   padding: 20px 0;
   border-top: 1px solid #d5c9e6;
   justify-content: center;
   box-sizing: border-box;
-  position: relative; /* 절대 위치가 아닌 상대 위치로 설정 */
   font-size: 25px;
 
   @media (max-width: 600px) {
