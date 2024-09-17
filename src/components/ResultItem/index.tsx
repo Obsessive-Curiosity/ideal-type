@@ -84,9 +84,9 @@ const ResultItem = ({ meRef, youRef }: ResultItemProps) => {
               ([key, value]: [string, string[]]) => (
                 <DataListItem key={key}>
                   <ItemTitle>{key}</ItemTitle>
-                  {value.map((v, idx) => (
-                    <Item key={idx}>{v}</Item>
-                  ))}
+                  {value.map((v, idx) =>
+                    key === "MBTI" ? spreadMbti(v) : <Item key={idx}>{v}</Item>
+                  )}
                 </DataListItem>
               )
             )}
