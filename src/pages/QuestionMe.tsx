@@ -92,8 +92,8 @@ const QuestionMe = () => {
             setHandler={setHandler}
             refs={refs}
           />
-          <Footer title={"제출하기"} onClick={onClickSubmit} />
         </ContentWrapper>
+        <Footer title={"제출하기"} onClick={onClickSubmit} />
       </QuestionWrapper>
     </>
   );
@@ -105,8 +105,6 @@ const QuestionWrapper = styled.div`
   flex-direction: column;
   height: 100svh;
   overflow: scroll;
-  /* padding-bottom: auto; */
-  /* justify-content: space-between; */
 `;
 
 const ContentWrapper = styled.div`
