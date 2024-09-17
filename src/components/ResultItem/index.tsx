@@ -25,7 +25,7 @@ const translateKeys = (obj: Omit<DataItem, "type">): Record<string, string[]> =>
   Object.fromEntries(
     Object.entries(obj).map(([key, value]) => [
       keyTranslations[key] || key,
-      value,
+      key === "mbti" ? filterMbti(value) : value,
     ])
   );
 
@@ -33,6 +33,26 @@ const filterData = (data: DataItem[], type: string) => {
   const findDataWithId = (item: DataItem) => item.type === type;
   const deleteId = ({ type, ...rest }: DataItem) => rest;
   return data.filter(findDataWithId).map(deleteId);
+};
+
+// mbti 필터링해서 보여주기
+const filterMbti = (value: string[]): string[] => {
+  const mbtis: string[] = [];
+  const filteredMbti = value.map((v) => {
+    return v.replace(/_/g, "");
+  });
+
+  console.log(filteredMbti);
+
+  filteredMbti.forEach((mbti) => {
+    const matchingItems = MBTI_LIST.filter((mbtiListItem) => {
+      return mbti.split("").every((char) => mbtiListItem.includes(char));
+    });
+
+    mbtis.push(...matchingItems);
+  });
+
+  return Array.from(new Set(mbtis));
 };
 
 interface ResultItemProps {
@@ -45,20 +65,6 @@ const ResultItem = ({ meRef, youRef }: ResultItemProps) => {
   const ME = filterData(data, "ME");
   const YOU = filterData(data, "YOU");
 
-  // mbti 필터링해서 보여주기
-  const spreadMbti = (mbti: string) => {
-    const filteredMbti = mbti.replace(/_/g, "");
-    const selectedMbti = [...filteredMbti.split("")];
-
-    const mbtis = MBTI_LIST.filter((mbtiListItem) => {
-      return selectedMbti.every((selectedItem) =>
-        mbtiListItem.includes(selectedItem)
-      );
-    });
-
-    return mbtis.map((mbtiItem, idx) => <Item key={idx}>{mbtiItem}</Item>);
-  };
-
   return (
     <>
       <DataList ref={meRef}>
@@ -68,9 +74,9 @@ const ResultItem = ({ meRef, youRef }: ResultItemProps) => {
             {Object.entries(translateKeys(item)).map(([key, value]) => (
               <DataListItem key={key}>
                 <ItemTitle>{key}</ItemTitle>
-                {value.map((v, idx) =>
-                  key === "MBTI" ? spreadMbti(v) : <Item key={idx}>{v}</Item>
-                )}
+                {value.map((v, idx) => (
+                  <Item key={idx}>{v}</Item>
+                ))}
               </DataListItem>
             ))}
           </div>
@@ -84,9 +90,9 @@ const ResultItem = ({ meRef, youRef }: ResultItemProps) => {
               ([key, value]: [string, string[]]) => (
                 <DataListItem key={key}>
                   <ItemTitle>{key}</ItemTitle>
-                  {value.map((v, idx) =>
-                    key === "MBTI" ? spreadMbti(v) : <Item key={idx}>{v}</Item>
-                  )}
+                  {value.map((v, idx) => (
+                    <Item key={idx}>{v}</Item>
+                  ))}
                 </DataListItem>
               )
             )}
