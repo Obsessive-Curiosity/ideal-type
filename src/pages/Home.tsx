@@ -63,6 +63,7 @@ const HomeWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+  height: 100%;
 `;
 const ContentWrapper = styled.div`
   display: flex;
