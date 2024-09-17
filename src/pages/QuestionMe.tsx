@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { createRef, useCallback, useContext, useEffect, useState } from "react";
+import { createRef, useCallback, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header/index";
 import Footer from "../components/Footer/index";
