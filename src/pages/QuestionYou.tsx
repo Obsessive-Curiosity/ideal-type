@@ -102,7 +102,7 @@ export default QuestionYou;
 const QuestionWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100svh;
+  height: 100vh;
   padding-bottom: auto;
   justify-content: space-between;
 `;
