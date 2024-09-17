@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { createRef, useCallback, useContext, useState } from "react";
+import { createRef, useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header/index";
 import Footer from "../components/Footer/index";
@@ -50,6 +50,19 @@ const QuestionMe = () => {
   const { onCreate, onUpdate } = useContext(QuestionDispatchContext);
   const [input, setInput] = useState(initialState);
   const isDone = data.length > 0;
+
+  const setMobileHeight = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  };
+
+  useEffect(() => {
+    setMobileHeight();
+
+    // resize 이벤트가 발생하면 다시 계산하도록 아래 코드 추가
+    window.addEventListener("resize", setMobileHeight);
+    return () => window.removeEventListener("resize", setMobileHeight);
+  }, []);
 
   const refs = refsKeys.reduce((acc, key) => {
     acc[key] = createRef<HTMLDivElement>();
@@ -104,7 +117,7 @@ const QuestionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  height: 100%;
+  height: calc(var(--vh, 1vh) * 100);
 `;
 
 const ContentWrapper = styled.div`
@@ -114,7 +127,6 @@ const ContentWrapper = styled.div`
   margin: 0 auto;
   justify-content: center; /* 콘텐츠 중앙 정렬 */
   box-sizing: border-box; /* 패딩과 여백을 포함한 크기 조정 */
-  height: 100%; /* 부모 요소로부터 높이 상속 */
 
   @media (max-width: 600px) {
     font-size: 12px; /* 모바일에서 폰트 크기 조정 */
