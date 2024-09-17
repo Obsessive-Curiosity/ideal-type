@@ -49,7 +49,7 @@ const QuestionMe = () => {
   const { data } = useContext(QuestionStateContext);
   const { onCreate, onUpdate } = useContext(QuestionDispatchContext);
   const [input, setInput] = useState(initialState);
-  const isDone = data.length > 0;
+  const isDone = data.length > 1;
 
   const refs = refsKeys.reduce((acc, key) => {
     acc[key] = createRef<HTMLDivElement>();
