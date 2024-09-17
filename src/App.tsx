@@ -117,13 +117,14 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #root {
-  background-color: white;
-  max-width: 600px;
-  margin: 0 auto;
-  box-shadow: rgb(100,100,100, 0.2) 0px 0px 29px 0px;
-  padding: 0px 20px;
-  height: 100%; /* 부모 요소 높이를 100%로 설정 */
-  display: flex; /* Flexbox를 사용하여 자식 요소들이 높이를 공유 */
-  flex-direction: column;
+    background-color: white;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: rgb(100,100,100, 0.2) 0px 0px 29px 0px;
+    padding: 0px 20px;
+    height: 100%; /* 부모 요소 높이를 100%로 설정 */
+    display: flex; /* Flexbox를 사용하여 자식 요소들이 높이를 공유 */
+    flex-direction: column;
+    overflow: hidden; /* 내부에서 스크롤 방지 */
   }
 `;
