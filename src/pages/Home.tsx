@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { replace, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import QuestionBtn from "../components/QuestionItems/QuestionBtn";
@@ -15,10 +15,10 @@ const Home = () => {
   const isDone = data.length > 1;
 
   const onClickMe = () => {
-    nav("/questionMe");
+    nav("/questionMe", { replace: true });
   };
   const onClickYou = () => {
-    nav("/questionYou");
+    nav("/questionYou", { replace: true });
   };
   const onClickReset = () => {
     onReset();

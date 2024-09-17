@@ -71,7 +71,7 @@ const QuestionYou = () => {
       } else {
         onCreate(newData);
       }
-      nav("/");
+      nav("/", { replace: true });
     } else {
       const missingKeys = Object.keys(input).filter(
         (key) => input[key as keyof typeof input].length === 0
