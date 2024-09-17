@@ -97,16 +97,16 @@ const QuestionMe = () => {
   return (
     <>
       <QuestionWrapper>
-        <Header title={"자기소개표 만들기"} />
         <ContentWrapper>
+          <Header title={"자기소개표 만들기"} />
           <UserQuestion
             type={type}
             input={input}
             setHandler={setHandler}
             refs={refs}
           />
+          <Footer title={"제출하기"} onClick={onClickSubmit} />
         </ContentWrapper>
-        <Footer title={"제출하기"} onClick={onClickSubmit} />
       </QuestionWrapper>
     </>
   );
@@ -122,7 +122,7 @@ const QuestionWrapper = styled.div`
 
 const ContentWrapper = styled.div`
   display: flex;
-  /* flex: 1; */
+  flex: 1;
   flex-direction: column;
   margin: 0 auto;
   justify-content: center; /* 콘텐츠 중앙 정렬 */
