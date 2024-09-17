@@ -62,8 +62,7 @@ export default Home;
 const HomeWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
-  height: 100%;
+  height: 100svh;
 `;
 const ContentWrapper = styled.div`
   display: flex;

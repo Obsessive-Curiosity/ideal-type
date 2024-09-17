@@ -2,6 +2,7 @@ import QuestionStateContext from "../../contexts/QuestionStateContext";
 import styled from "styled-components";
 import DataItem from "../../interfaces/DataItem";
 import { useContext } from "react";
+import MBTI_LIST from "../../constants/MBTI_LIST";
 
 const keyTranslations: { [key: string]: string } = {
   age: "나이",
@@ -44,6 +45,19 @@ const ResultItem = ({ meRef, youRef }: ResultItemProps) => {
   const ME = filterData(data, "ME");
   const YOU = filterData(data, "YOU");
 
+  const spreadMbti = (mbti: string) => {
+    const filteredMbti = mbti.replace(/_/g, "");
+    const selectedMbti = [...filteredMbti.split("")];
+
+    const mbtis = MBTI_LIST.filter((mbtiListItem) => {
+      return selectedMbti.every((selectedItem) =>
+        mbtiListItem.includes(selectedItem)
+      );
+    });
+
+    return mbtis.join(", ");
+  };
+
   return (
     <>
       <DataList ref={meRef}>
@@ -54,7 +68,7 @@ const ResultItem = ({ meRef, youRef }: ResultItemProps) => {
               <DataListItem key={key}>
                 <ItemTitle>{key}</ItemTitle>
                 {value.map((v, idx) => (
-                  <Item key={idx}>{v}</Item>
+                  <Item key={idx}>{key === "MBTI" ? spreadMbti(v) : v}</Item>
                 ))}
               </DataListItem>
             ))}

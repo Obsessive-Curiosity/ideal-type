@@ -38,20 +38,18 @@ function reducer(state: DataItem[], action: ActionType): DataItem[] {
 }
 
 function App() {
-  const [data, dispatch] = useReducer(reducer, []);
+  const storedData = localStorage.getItem("questionData");
+  const [data, dispatch] = useReducer(
+    reducer,
+    storedData ? JSON.parse(storedData) : []
+  );
 
-  const setMobileHeight = () => {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty("--vh", `${vh}px`);
-  };
-
+  // 로컬 스토리지에 데이터를 저장
   useEffect(() => {
-    setMobileHeight();
-
-    // resize 이벤트가 발생하면 다시 계산하도록 아래 코드 추가
-    window.addEventListener("resize", setMobileHeight);
-    return () => window.removeEventListener("resize", setMobileHeight);
-  }, []);
+    if (data.length > 0) {
+      localStorage.setItem("questionData", JSON.stringify(data));
+    }
+  }, [data]);
 
   // onCreate 함수
   const onCreate = (newData: DataItem) => {
@@ -111,13 +109,13 @@ const GlobalStyle = createGlobalStyle`
   html, body {
     width: 100%;
     background-color: #694e99;
-    height: calc(var(--vh, 1vh) * 100);
+    height:100%;
   }
 
   #root {
     background-color: white;
     max-width: 600px;
-    height: calc(var(--vh, 1vh) * 100);
+    min-height: 100vh;
     margin: 0 auto;
     box-shadow: rgb(100,100,100, 0.2) 0px 0px 29px 0px;
     padding: 0px 20px;
