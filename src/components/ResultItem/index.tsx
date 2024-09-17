@@ -45,6 +45,7 @@ const ResultItem = ({ meRef, youRef }: ResultItemProps) => {
   const ME = filterData(data, "ME");
   const YOU = filterData(data, "YOU");
 
+  // mbti 필터링해서 보여주기
   const spreadMbti = (mbti: string) => {
     const filteredMbti = mbti.replace(/_/g, "");
     const selectedMbti = [...filteredMbti.split("")];
@@ -55,7 +56,7 @@ const ResultItem = ({ meRef, youRef }: ResultItemProps) => {
       );
     });
 
-    return mbtis.join(", ");
+    return mbtis.map((mbtiItem, idx) => <Item key={idx}>{mbtiItem}</Item>);
   };
 
   return (
@@ -67,9 +68,9 @@ const ResultItem = ({ meRef, youRef }: ResultItemProps) => {
             {Object.entries(translateKeys(item)).map(([key, value]) => (
               <DataListItem key={key}>
                 <ItemTitle>{key}</ItemTitle>
-                {value.map((v, idx) => (
-                  <Item key={idx}>{key === "MBTI" ? spreadMbti(v) : v}</Item>
-                ))}
+                {value.map((v, idx) =>
+                  key === "MBTI" ? spreadMbti(v) : <Item key={idx}>{v}</Item>
+                )}
               </DataListItem>
             ))}
           </div>
