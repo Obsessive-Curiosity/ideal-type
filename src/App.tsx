@@ -110,21 +110,18 @@ const GlobalStyle = createGlobalStyle`
 
   html, body {
     width: 100%;
-    height: calc(var("--vh", 1vh) * 100);
     background-color: rgb(246,246,246);
     background-color: yellow;
-    overflow: hidden;
   }
 
   #root {
     background-color: white;
     max-width: 600px;
+    height: calc(var(--vh, 1vh) * 100);
     margin: 0 auto;
     box-shadow: rgb(100,100,100, 0.2) 0px 0px 29px 0px;
     padding: 0px 20px;
-    height: 100%; /* 부모 요소 높이를 100%로 설정 */
-    display: flex; /* Flexbox를 사용하여 자식 요소들이 높이를 공유 */
-    flex-direction: column;
+    flex: 1;
     overflow: hidden; /* 내부에서 스크롤 방지 */
   }
 `;
