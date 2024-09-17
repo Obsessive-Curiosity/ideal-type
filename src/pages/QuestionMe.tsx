@@ -105,8 +105,8 @@ const QuestionWrapper = styled.div`
   flex-direction: column;
   height: 100svh;
   overflow: scroll;
-  padding-bottom: auto;
-  justify-content: space-between;
+  /* padding-bottom: auto; */
+  /* justify-content: space-between; */
 `;
 
 const ContentWrapper = styled.div`
