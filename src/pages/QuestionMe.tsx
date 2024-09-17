@@ -103,12 +103,12 @@ export default QuestionMe;
 const QuestionWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%; /* 부모 요소로부터 높이 상속 */
+  flex: 1;
 `;
 
 const ContentWrapper = styled.div`
   display: flex;
-  flex: 1; /* 남은 공간을 모두 차지 */
+  /* flex: 1; */
   flex-direction: column;
   margin: 0 auto;
   justify-content: center; /* 콘텐츠 중앙 정렬 */
