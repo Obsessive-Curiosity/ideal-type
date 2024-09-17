@@ -112,6 +112,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: calc(var(--vh, 1vh) * 100);
     background-color: rgb(246,246,246);
+    background-color: yellow;
   }
 
   #root {
