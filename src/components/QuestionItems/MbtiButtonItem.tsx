@@ -1,6 +1,5 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
-import QuestionStateContext from "../../contexts/QuestionStateContext";
 
 // optMBTI 객체의 타입 정의
 interface OptMBTI {
