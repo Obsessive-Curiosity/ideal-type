@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
+import QuestionStateContext from "../../contexts/QuestionStateContext";
 
 // optMBTI 객체의 타입 정의
 interface OptMBTI {
@@ -23,7 +24,7 @@ interface MbtiButtonItemProps {
 
 const MbtiButtonItem = ({ index, onChangeUpdate }: MbtiButtonItemProps) => {
   // 각 항목의 현재 선택된 인덱스를 저장
-  const [currentIndex, setCurrentIndex] = useState<number[]>(Array(4).fill(0));
+  const [currentIndex, setCurrentIndex] = useState<number[]>([0, 0, 0, 0]);
 
   const handleToggle = (buttonIndex: number) => {
     setCurrentIndex((prev) => {

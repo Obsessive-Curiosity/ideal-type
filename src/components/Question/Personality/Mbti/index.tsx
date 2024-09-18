@@ -33,9 +33,6 @@ function reducer(state: string[], action: ActionType): string[] {
 }
 
 function Mbti({ type, setHandler }: QuesiotnProps) {
-  const ME = "ME";
-  const user = type === ME ? "본인" : "상대방";
-  // const { data } = useContext(QuestionStateContext);
   const [selectedItems, dispatch] = useReducer(reducer, ["____"]);
   const [buttonCount, setButtonCount] = useState<number>(selectedItems.length); // 초기 버튼 개수
 
@@ -62,9 +59,9 @@ function Mbti({ type, setHandler }: QuesiotnProps) {
 
   return (
     <QuestionWrapper>
-      <h2>{user}의 MBTI를 선택해주세요.</h2>
+      <h2>{type === "ME" ? "본인" : "상대방"}의 MBTI를 선택해주세요.</h2>
       <p>💡중복 선택 가능</p>
-      {type === ME && (
+      {type === "ME" && (
         <p>
           <LinkToMbti
             href="https://www.16personalities.com/ko"

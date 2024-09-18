@@ -84,7 +84,7 @@ function App() {
             <Route path="/questionMe" element={<QuestionMe />} />
             <Route path="/questionYou" element={<QuestionYou />} />
             <Route path="/result" element={<Result />} />
-            <Route element={<NotFound />} />
+            <Route path="/*" element={<NotFound />} />
           </Routes>
         </QuestionDispatchContext.Provider>
       </QuestionStateContext.Provider>
