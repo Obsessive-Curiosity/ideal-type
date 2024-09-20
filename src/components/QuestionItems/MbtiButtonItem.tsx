@@ -16,14 +16,29 @@ const optMBTI: OptMBTI = {
   item4: ["_", "P", "J"],
 };
 
+const getMbtiBtnInitial = (value: string): number[] => {
+  const splitValue = value.split(""); // "I__P" -> ["I", "_", "_", "P"]
+
+  return splitValue.map((char, index) => {
+    // item1, item2, item3, item4에 맞게 값의 인덱스를 찾음
+    const key = `item${index + 1}` as keyof typeof optMBTI;
+    return optMBTI[key].indexOf(char);
+  });
+};
+
 interface MbtiButtonItemProps {
   index: number;
+  value: string;
   onChangeUpdate: (index: number, value: string) => void;
 }
 
-const MbtiButtonItem = ({ index, onChangeUpdate }: MbtiButtonItemProps) => {
+const MbtiButtonItem = ({
+  index,
+  value,
+  onChangeUpdate,
+}: MbtiButtonItemProps) => {
   // 각 항목의 현재 선택된 인덱스를 저장
-  const [currentIndex, setCurrentIndex] = useState<number[]>([0, 0, 0, 0]);
+  const [currentIndex, setCurrentIndex] = useState(getMbtiBtnInitial(value));
 
   const handleToggle = (buttonIndex: number) => {
     setCurrentIndex((prev) => {

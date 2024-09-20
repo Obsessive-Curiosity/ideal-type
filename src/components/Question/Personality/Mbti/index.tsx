@@ -36,7 +36,7 @@ function Mbti({ type, setHandler }: QuesiotnProps) {
   useEffect(() => {
     const filteredItems = selectedItems.filter((item) => item !== "____");
 
-    setHandler("mbti", filteredItems); // setHandler와 버튼 개수 조정 한 번에 처리
+    setHandler("mbti", filteredItems); // setHandler 처리
     setButtonCount(filteredItems.length); // 필터링된 아이템의 길이에 맞게 버튼 개수 조정
   }, [selectedItems, setHandler]);
 
@@ -68,10 +68,11 @@ function Mbti({ type, setHandler }: QuesiotnProps) {
         </p>
       )}
 
-      {Array.from({ length: buttonCount }, (_, index) => (
+      {selectedItems.map((item, idx) => (
         <MbtiButtonItem
-          key={index}
-          index={index}
+          key={idx}
+          index={idx}
+          value={item} // item 값을 props로 전달
           onChangeUpdate={onChangeUpdate}
         />
       ))}

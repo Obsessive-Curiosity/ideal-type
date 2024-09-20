@@ -25,7 +25,8 @@ const translateKeys = (obj: Omit<DataItem, "type">): Record<string, string[]> =>
   Object.fromEntries(
     Object.entries(obj).map(([key, value]) => [
       keyTranslations[key] || key,
-      key === "mbti" ? filterMbti(value) : value,
+      // key === "mbti" ? filterMbti(value) : value,
+      value,
     ])
   );
 
@@ -36,22 +37,22 @@ const filterData = (data: DataItem[], type: string) => {
 };
 
 // mbti 필터링해서 보여주기
-const filterMbti = (value: string[]): string[] => {
-  const mbtis: string[] = [];
-  const filteredMbti = value.map((v) => {
-    return v.replace(/_/g, "");
-  });
+// const filterMbti = (value: string[]): string[] => {
+//   const mbtis: string[] = [];
+//   const filteredMbti = value.map((v) => {
+//     return v.replace(/_/g, "");
+//   });
 
-  filteredMbti.forEach((mbti) => {
-    const matchingItems = MBTI_LIST.filter((mbtiListItem) => {
-      return mbti.split("").every((char) => mbtiListItem.includes(char));
-    });
+//   filteredMbti.forEach((mbti) => {
+//     const matchingItems = MBTI_LIST.filter((mbtiListItem) => {
+//       return mbti.split("").every((char) => mbtiListItem.includes(char));
+//     });
 
-    mbtis.push(...matchingItems);
-  });
+//     mbtis.push(...matchingItems);
+//   });
 
-  return Array.from(new Set(mbtis));
-};
+//   return Array.from(new Set(mbtis));
+// };
 
 interface ResultItemProps {
   meRef: React.RefObject<HTMLDivElement>;
