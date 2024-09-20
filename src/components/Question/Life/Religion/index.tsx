@@ -1,11 +1,10 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import QuesiotnProps from "../../../../interfaces/QuestionProps";
 import QuestionWrapper from "../../../../styles/QuestionWrapper";
 import CheckboxItem from "../../../QuestionItems/CheckboxItem";
 import OPT_CHECKBOX from "../../../../constants/OPT_CHECKBOX";
 import useCheckbox from "../../../../hooks/useCheckbox";
-import QuestionStateContext from "../../../../contexts/QuestionStateContext";
-import getInitialData from "../../../../features/getInitialData";
+import useInitialData from "../../../../hooks/useInitialData";
 
 const religionList1: [string, typeof OPT_CHECKBOX.SINGLE][] = [
   ["종교 없음", OPT_CHECKBOX.SINGLE],
@@ -27,9 +26,8 @@ const Religion = ({ type, setHandler }: QuesiotnProps) => {
   const user = type === ME ? "본인" : "상대방";
   const religionList = type === ME ? religionList1 : religionList2;
   const contentTip = type === ME ? "중복 선택 불가능" : "중복 선택 가능";
-  const { data } = useContext(QuestionStateContext);
   const { selectedItems, onChangeCheckbox } = useCheckbox(
-    getInitialData(type, data, "religion")
+    useInitialData(type, "religion")
   );
 
   useEffect(() => {

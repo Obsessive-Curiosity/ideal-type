@@ -1,11 +1,10 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import QuesiotnProps from "../../../../interfaces/QuestionProps";
 import QuestionWrapper from "../../../../styles/QuestionWrapper";
 import CheckboxItem from "../../../QuestionItems/CheckboxItem";
 import OPT_CHECKBOX from "../../../../constants/OPT_CHECKBOX";
 import useCheckbox from "../../../../hooks/useCheckbox";
-import getInitialData from "../../../../features/getInitialData";
-import QuestionStateContext from "../../../../contexts/QuestionStateContext";
+import useInitialData from "../../../../hooks/useInitialData";
 
 const clothingStyleList: [string, typeof OPT_CHECKBOX.MULTI][] = [
   ["미니멀룩", OPT_CHECKBOX.MULTI],
@@ -20,9 +19,8 @@ const clothingStyleList: [string, typeof OPT_CHECKBOX.MULTI][] = [
 const ClothingStyle = ({ type, setHandler }: QuesiotnProps) => {
   const ME = "ME";
   const user = type === ME ? "본인" : "상대방";
-  const { data } = useContext(QuestionStateContext);
   const { selectedItems, onChangeCheckbox } = useCheckbox(
-    getInitialData(type, data, "clothingStyle")
+    useInitialData(type, "clothingStyle")
   );
 
   useEffect(() => {

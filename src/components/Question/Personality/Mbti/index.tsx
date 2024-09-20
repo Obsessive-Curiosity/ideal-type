@@ -1,15 +1,9 @@
-import {
-  useState,
-  // useContext,
-  useEffect,
-  useReducer,
-  useCallback,
-} from "react";
+import { useState, useEffect, useReducer, useCallback } from "react";
 import styled from "styled-components";
 import QuestionWrapper from "../../../../styles/QuestionWrapper";
 import QuesiotnProps from "../../../../interfaces/QuestionProps";
-// import QuestionStateContext from "../../../../contexts/QuestionStateContext";
 import MbtiButtonItem from "../../../QuestionItems/MbtiButtonItem";
+import useInitialData from "../../../../hooks/useInitialData";
 
 // 액션 타입 정의
 type ActionType =
@@ -33,17 +27,18 @@ function reducer(state: string[], action: ActionType): string[] {
 }
 
 function Mbti({ type, setHandler }: QuesiotnProps) {
-  const [selectedItems, dispatch] = useReducer(reducer, ["____"]);
+  const [selectedItems, dispatch] = useReducer(
+    reducer,
+    useInitialData(type, "mbti")
+  );
   const [buttonCount, setButtonCount] = useState<number>(selectedItems.length); // 초기 버튼 개수
 
   useEffect(() => {
     const filteredItems = selectedItems.filter((item) => item !== "____");
-    setHandler("mbti", filteredItems);
-  }, [selectedItems, setHandler]);
 
-  useEffect(() => {
-    setButtonCount(selectedItems.length); // selectedItems의 길이에 맞게 버튼 개수 조정
-  }, [selectedItems]);
+    setHandler("mbti", filteredItems); // setHandler와 버튼 개수 조정 한 번에 처리
+    setButtonCount(filteredItems.length); // 필터링된 아이템의 길이에 맞게 버튼 개수 조정
+  }, [selectedItems, setHandler]);
 
   const onClickAdd = () => {
     dispatch({ type: "CREATE", selectedItems: ["____"] });
