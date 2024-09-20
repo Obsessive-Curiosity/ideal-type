@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer, useCallback } from "react";
+import { useEffect, useReducer, useCallback } from "react";
 import styled from "styled-components";
 import QuestionWrapper from "../../../../styles/QuestionWrapper";
 import QuesiotnProps from "../../../../interfaces/QuestionProps";
@@ -31,13 +31,11 @@ function Mbti({ type, setHandler }: QuesiotnProps) {
     reducer,
     useInitialData(type, "mbti")
   );
-  const [buttonCount, setButtonCount] = useState<number>(selectedItems.length); // 초기 버튼 개수
 
   useEffect(() => {
     const filteredItems = selectedItems.filter((item) => item !== "____");
 
     setHandler("mbti", filteredItems); // setHandler 처리
-    setButtonCount(filteredItems.length); // 필터링된 아이템의 길이에 맞게 버튼 개수 조정
   }, [selectedItems, setHandler]);
 
   const onClickAdd = () => {

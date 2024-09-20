@@ -2,7 +2,7 @@ import QuestionStateContext from "../../contexts/QuestionStateContext";
 import styled from "styled-components";
 import DataItem from "../../interfaces/DataItem";
 import { useContext } from "react";
-import MBTI_LIST from "../../constants/MBTI_LIST";
+// import MBTI_LIST from "../../constants/MBTI_LIST";
 
 const keyTranslations: { [key: string]: string } = {
   age: "나이",
