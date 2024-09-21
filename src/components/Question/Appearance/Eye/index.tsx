@@ -7,6 +7,7 @@ import useCheckbox from "../../../../hooks/useCheckbox";
 import useInitialData from "../../../../hooks/useInitialData";
 
 const eyeList1: [string, typeof OPT_CHECKBOX.SINGLE][] = [
+  ["땡그란 눈", OPT_CHECKBOX.SINGLE],
   ["평범한 눈", OPT_CHECKBOX.SINGLE],
   ["치켜올라간 눈", OPT_CHECKBOX.SINGLE],
   ["처진 눈", OPT_CHECKBOX.SINGLE],
@@ -16,6 +17,7 @@ const eyeList1: [string, typeof OPT_CHECKBOX.SINGLE][] = [
   ["동태눈", OPT_CHECKBOX.SINGLE],
 ];
 const eyeList2: [string, typeof OPT_CHECKBOX.MULTI][] = [
+  ["땡그란 눈", OPT_CHECKBOX.MULTI],
   ["평범한 눈", OPT_CHECKBOX.MULTI],
   ["치켜올라간 눈", OPT_CHECKBOX.MULTI],
   ["처진 눈", OPT_CHECKBOX.MULTI],
