@@ -2,14 +2,14 @@ import { createGlobalStyle } from "styled-components";
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useReducer } from "react";
 
-//pages
+// pages
 import Home from "./pages/Home";
 import QuestionMe from "./pages/QuestionMe";
 import QuestionYou from "./pages/QuestionYou";
 import Result from "./pages/Result";
 import NotFound from "./pages/NotFound";
 
-//interface
+// interface
 import DataItem from "./interfaces/DataItem";
 
 // context
@@ -38,18 +38,15 @@ function reducer(state: DataItem[], action: ActionType): DataItem[] {
 }
 
 function App() {
-  // const storedData = localStorage.getItem("questionData");
-  const [data, dispatch] = useReducer(
-    reducer,
-    []
-    // storedData ? JSON.parse(storedData) : []
-  );
+  // 로컬 스토리지에서 데이터를 가져옴
+  const storedData = localStorage.getItem("questionData");
+  const initialData = storedData ? JSON.parse(storedData) : [];
+
+  const [data, dispatch] = useReducer(reducer, initialData);
 
   // 로컬 스토리지에 데이터를 저장
   useEffect(() => {
-    if (data.length > 0) {
-      localStorage.setItem("questionData", JSON.stringify(data));
-    }
+    localStorage.setItem("questionData", JSON.stringify(data));
   }, [data]);
 
   // onCreate 함수
@@ -100,7 +97,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'NotoSans';
     src: url('/NotoSansKR-VariableFont_wght.ttf');
   }
-  *{
+  * {
     font-family: 'NotoSans', sans-serif;
     margin: 0;
     padding: 0;
@@ -110,7 +107,7 @@ const GlobalStyle = createGlobalStyle`
   html, body {
     width: 100%;
     background-color: #694e99;
-    height:100%;
+    height: 100%;
   }
 
   #root {
@@ -118,7 +115,7 @@ const GlobalStyle = createGlobalStyle`
     max-width: 600px;
     min-height: 100svh;
     margin: 0 auto;
-    box-shadow: rgb(100,100,100, 0.2) 0px 0px 29px 0px;
+    box-shadow: rgb(100, 100, 100, 0.2) 0px 0px 29px 0px;
     padding: 0px 20px;
     flex: 1;
   }
